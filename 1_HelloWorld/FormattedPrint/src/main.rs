@@ -54,4 +54,7 @@ fn main() {
     let number: f64 = 1.0;
     let width: usize = 5;
     println!("{number:>width$}");
+
+    let pi: f64 = 3.141592;
+    println!("pi is approximately {:.3}", pi); // round up to 3 decimals - {:.3}
 }
