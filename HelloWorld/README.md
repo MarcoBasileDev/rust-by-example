@@ -1,4 +1,4 @@
-# Hello, world!
+# 1. Hello, world!
 
 ## Compile a binary
 `$ rustc hello.rs`
@@ -16,3 +16,12 @@ For example:
     // line comments inside are not affected by either state
     
     // */
+
+## Formatted print
+
+Printing is handled by a series of macros defined in std::fmt some of which are:
+- format!: write formatted text to String
+- print!: same as format! but the text is printed to the console.
+- println!: same as print! but a newline is appended.
+- eprint!: same as print! but the text is printed to the standard error
+- eprintln!: same as eprint! but a newline is appended.
