@@ -13,6 +13,21 @@ impl fmt::Display for Complex {
     }
 }
 
+struct List(Vec<i32>);
+
+impl fmt::Display for List {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let vec = &self.0;
+
+        write!(f, "[")?;
+        for (index, v) in vec.iter().enumerate() {
+            if index != 0 { write!(f, ", ")?; }
+            write!(f, "{} : {}", index, v)?;
+        }
+        write!(f, "]")
+    }
+}
+
 fn main() {
 
     let c1 = Complex { real: 3.3, imag: 7.2 };
@@ -26,4 +41,6 @@ fn main() {
     println!("Display: {}", c2);
     println!("Debug: {:?}", c2);
 
+    let v = List(vec![8, 9, 10]);
+    println!("Printed list: {}", v);
 }
