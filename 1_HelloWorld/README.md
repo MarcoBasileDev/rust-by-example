@@ -25,3 +25,10 @@ Printing is handled by a series of macros defined in std::fmt some of which are:
 - println!: same as print! but a newline is appended.
 - eprint!: same as print! but the text is printed to the standard error
 - eprintln!: same as eprint! but a newline is appended.
+
+## Display
+
+fmt::Debug hardly looks compact and clean, so it is often advantageous to customize the output appearance. 
+This is done by manually implementing fmt::Display, which uses the {} print marker.
+There is no ideal style for all types and the std library doesn't presume to dictate one.
+You have to implement your own style.
