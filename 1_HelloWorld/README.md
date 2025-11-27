@@ -32,3 +32,8 @@ fmt::Debug hardly looks compact and clean, so it is often advantageous to custom
 This is done by manually implementing fmt::Display, which uses the {} print marker.
 There is no ideal style for all types and the std library doesn't presume to dictate one.
 You have to implement your own style.
+
+Implementing fmt::Display for a structure where the elements must each be handled sequentially is tricky. 
+The problem is that each write! generates a fmt::Result. 
+Proper handling of this requires dealing with all the results. 
+Rust provides the ? operator for exactly this purpose.
