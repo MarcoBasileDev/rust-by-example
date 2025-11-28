@@ -17,6 +17,8 @@ Despite the value of a unit type being a tuple, it is not considered a compound 
 Variables can always be type annotated. Numbers may additionally be annotated via a suffix or by default.
 Integers default to i32 and floats to f64. Rust can also infer types from context.
 
+## Literals and Operators
+
 ```rust
 fn main() {
 // Variables can be type annotated.
@@ -84,3 +86,9 @@ println!("1 + 2 = {}", 1u32 + 2);
     println!("One million is written as {}", 1_000_000u32);
 }
 ```
+
+## Tuples
+
+A tuple is a collection of values of different types. Tuples are constructed using parentheses (), and each tuple itself is a value with type signature (T1, T2, ...), where T1, T2 are the types of its members. 
+Functions can use tuples to return multiple values, as tuples can hold any number of values.
+Tuples with more than 12 elements, cannot be printed.
