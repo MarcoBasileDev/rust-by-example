@@ -63,8 +63,7 @@ fn main() {
 println!("1 + 2 = {}", 1u32 + 2);
 
     // Integer subtraction
-    println!("1 - 2 = {}", 1i32 - 2);
-    // TODO ^ Try changing `1i32` to `1u32` to see why the type is important
+    println!("1 - 2 = {}", 1i32 - 2); // if you change the 1i32 to 1u32 the compiler will raise an error. error: this arithmetic operation will overflow 
 
     // Scientific notation
     println!("1e4 is {}, -2.5e-3 is {}", 1e4, -2.5e-3);
