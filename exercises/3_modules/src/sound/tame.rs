@@ -5,7 +5,3 @@ pub fn dog() {
 pub fn cat() {
     println!("Cat goes MEOW!");
 }
-
-pub fn fox() {
-    println!("What does the fox say???");
-}
