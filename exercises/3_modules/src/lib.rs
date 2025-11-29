@@ -3,3 +3,4 @@ pub const SECOND: i32 = 2;
 pub const THIRD: i32 = 3;
 
 pub mod sound;
+pub mod prelude;
