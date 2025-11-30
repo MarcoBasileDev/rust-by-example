@@ -1,5 +1,5 @@
 [package]
-name = "A_variables"
+name = "a_variables"
 version = "2.3.4"
 edition = "2024"
 [dependencies]

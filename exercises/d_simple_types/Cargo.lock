@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "D_simple_types"
+name = "d_simple_types"
 version = "0.1.0"

@@ -1,4 +1,4 @@
-use C_modules::prelude::*;
+use c_modules::prelude::*;
 
 fn main() {
     print!("Listening to animal {}: ", FIRST);
