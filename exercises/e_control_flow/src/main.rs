@@ -24,20 +24,13 @@ fn main() {
 
     println!("The sum is {}", sum);
 
-    // 3. Use a `while` loop to add 12 numbers to the `fives` vector.
-    //
-    // The loop should continue while `fives.len()` is less than 12.
-    //
-    // Each time through the loop:
-    // - Call `fives.push(number)` to push (a copy of) `number` onto the vector
-    // - Add 5 to `number`
-    //
-    // If you do this correctly, the vector will be [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60]
-
     let mut fives: Vec<i32> = vec![];
     let mut number = 5;
 
-    // (write the `while` loop here)
+    while fives.len() < 12 {
+        fives.push(number);
+        number += 5;
+    }
 
     println!("Here are the first 12 multiples of 5: {:?}", fives);
 
