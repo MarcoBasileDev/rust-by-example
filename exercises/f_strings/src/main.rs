@@ -1,4 +1,3 @@
-// Silence some warnings so they don't distract from the exercise.
 #![allow(unused_mut, unused_assignments)]
 
 // Q. What's the difference between a string literal and a borrowed string slice?
@@ -11,36 +10,22 @@
 // The variable my_name is a borrowed string slice, initialized by the string literal "Nathan".
 
 fn main() {
-    // 1. Using unicode escape codes, use println to print out a sparkles emoji (codepoint 2728).
-
-    // println!( ... );
-
-    // 2. Uncomment the commented line below and set the value of `favorite` to the emoji "🍓"
-    // (codepoint 1f353).
-    //
-    // - You can type (or copy-and-paste) in the strawberry emoji, or use unicode escape codes.
-    // - Use .to_string() to convert the string literal into a String.
+    println!("\u{2728}");
 
     let mut favorite = String::new();
-    // favorite = ...
+    favorite = "🍓".to_string();
+
     if favorite != "" {
         println!("Everyone's favorite fruit is: {favorite}");
     }
 
-    // 3. Uncomment the code below. Using newline escape codes, complete the string literal so it
-    // prints out:
-    //
-    // Now is
-    // the time
-    // for all
-    // great men
+    let saying = "Now\nthe time\nfor all\ngreat man";
+    println!("{saying}");
 
-    // let saying = "Now ...
-    // println!("{saying}");
-
-    // Challenge: Change the string literal in #3 so that it:
-    //
-    // - Is a multiline string (uses real newlines instead of newline escape codes)
-    // - Is indented properly with the code
-    // - Still outputs the exact same text, without any leading spaces
+    println!("Challenge");
+    let saying = r#"Now
+the time
+for all
+great man"#;
+    println!("{saying}");
 }
