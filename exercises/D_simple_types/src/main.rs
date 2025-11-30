@@ -9,43 +9,21 @@ fn main() {
     let coords_arr: [f64; 2] = [coords.0, coords.1];
     print_array(coords_arr);
 
-    let series = [1, 1, 2, 3, 5, 8, 13];
+    let series: [i32; 7] = [1, 1, 2, 3, 5, 8, 13];
     ding(series[6]);
 
     let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
     on_off(mess.2[1].0);
 
-    // 5. (Part A)
-    //
-    // Uncomment the line below, run the code, and examine the output. Then go refactor the
-    // `print_distance` function according to the instructions in the comments inside that function.
-
-    // print_distance(coords);
+    print_distance(coords);
 }
 
-// 5. (Part B)
-//
-// Using `z.0` and `z.1` is not nearly as nice as using `x` and `y`.  Lucky for us, Rust supports
-// destructuring function arguments.  Try replacing `z` in the parameter list below with `(x, y)`
-// and then adjust the function body below to use `x` and `y` instead of `z.0` and `z.1`
-//
-// You should be able to run the code again and get the output as before.
-fn print_distance(z: (f64, f64)) {
+fn print_distance((x, y): (f64, f64)) {
     println!(
         "Distance to the origin is {}",
-        (z.0.powf(2.0) + z.1.powf(2.0)).sqrt()
+        (x.powf(2.0) + y.powf(2.0)).sqrt()
     );
 }
-
-// Challenge:
-//
-// Although types can often be inferred by the compiler, sometimes we write them out for clarity.
-// Like we did with the `let coords: (f64, f64) = ...` declaration at the top of the `main`
-// function.
-//
-// - Add the type annotation for the `series` variable in `main`.
-// - Add the type annotation for the `mess` variable in `main`. (This may be a good example of why
-//   it is nice to *not* have to add the type annotation! 😆)
 
 fn print_difference(x: f64, y: f64) {
     println!("Difference between {} and {} is {}", x, y, (x - y).abs());
