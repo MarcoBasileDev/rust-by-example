@@ -1,18 +1,15 @@
 #![allow(unused_mut, unused_variables)]
 
 fn main() {
-    // 1. Use an unconditional `loop` to count how many times we can double `bunnies` until there
-    // are over 500 bunnies. (Hint: The answer is 8 times)
-    //
-    // Inside the loop:
-    // - Add 1 to `count`
-    // - Multiply `bunnies` by 2
-    // - If `bunnies` is larger than 500, break out of the loop.
-
     let mut count = 0;
     let mut bunnies = 2;
 
-    // (write your `loop` here)
+    loop {
+        count += 1;
+        bunnies *= 2;
+
+        if bunnies > 500 { break }
+    }
 
     println!(
         "Bunnies doubled {} times before there were more than 500",
