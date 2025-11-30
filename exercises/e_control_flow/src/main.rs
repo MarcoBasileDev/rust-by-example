@@ -34,18 +34,17 @@ fn main() {
 
     println!("Here are the first 12 multiples of 5: {:?}", fives);
 
-    // 4. Use `if`, `else if` and `else` inside the `for` loop below to do the following:
-    //
-    // - If the number is 0, then add 7 to `total`
-    // - If the number is 1 or 2 then add 30 to `total`
-    // - If the number is anything else, subtract 5 from `total`
-    //
-    // Hint: The total should be 52
-
     let mut total = 0;
     let numbers = vec![0, 1, 2, 3, 4, 5];
+
     for number in numbers {
-        // (write your `if/else` expression here)
+        if number == 0 {
+            total += 7
+        } else if number == 1 || number == 2 {
+            total += 30
+        } else {
+            total -= 5
+        }
     }
 
     println!("The total is {}", total);
