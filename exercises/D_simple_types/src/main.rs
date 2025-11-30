@@ -13,10 +13,7 @@ fn main() {
     ding(series[6]);
 
     let mess = ([3, 2], 3.14, [(false, -3), (true, -100)], 5, "candy");
-    // 4. Pass the `on_off` function the value `true` from the variable `mess`.  Done correctly,
-    // `cargo run` will produce the additional output "Lights are on!" I'll get you started:
-    //
-    //on_off(mess.2 ...);
+    on_off(mess.2[1].0);
 
     // 5. (Part A)
     //
