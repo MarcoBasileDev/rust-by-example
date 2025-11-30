@@ -3,14 +3,16 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/HelloWorld/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/exercises/1_variables/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/exercises/A_variables/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/exercises/D_simple_types/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/Debug/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/Display/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/FormattedPrint/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/Formatting/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rust-by-example/2_Primitives/Tuples/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/HelloWorld/target" />
-      <excludeFolder url="file://$MODULE_DIR$/exercises/1_variables/target" />
+      <excludeFolder url="file://$MODULE_DIR$/exercises/A_variables/target" />
+      <excludeFolder url="file://$MODULE_DIR$/exercises/D_simple_types/target" />
       <excludeFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/Debug/target" />
       <excludeFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/Display/target" />
       <excludeFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/FormattedPrint/target" />

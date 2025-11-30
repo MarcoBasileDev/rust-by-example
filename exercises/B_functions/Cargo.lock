@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "functions"
+name = "B_functions"
 version = "0.1.0"

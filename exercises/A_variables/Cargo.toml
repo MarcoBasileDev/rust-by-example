@@ -1,6 +1,5 @@
 [package]
-name = "functions"
-version = "0.1.0"
+name = "A_variables"
+version = "2.3.4"
 edition = "2024"
-
 [dependencies]
