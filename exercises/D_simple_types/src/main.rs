@@ -3,13 +3,8 @@
 
 fn main() {
     let coords: (f64, f64) = (6.3, 15.0);
-    // 1. Pass the two elements of the `coords` tuple as two separate arguments to the
-    // `print_difference` function. Use tuple indexing.
-    //
-    // The `print_difference` function is defined near the end of this file if you would like to
-    // look at how it is defined.
-    //
-    //print_difference( ... );   // Uncomment and finish this line
+
+    print_difference(coords.0, coords.1 );
 
     // 2. We want to use the `print_array` function to print coords...but coords isn't an array!
     // Create an array of type [f64; 2] and initialize it to contain the
