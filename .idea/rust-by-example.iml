@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/FormattedPrint/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/Formatting/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/rust-by-example/2_Primitives/Tuples/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/exercises/C_modules/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/HelloWorld/target" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/A_variables/target" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/D_simple_types/target" />
@@ -18,6 +19,7 @@
       <excludeFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/FormattedPrint/target" />
       <excludeFolder url="file://$MODULE_DIR$/rust-by-example/1_HelloWorld/Formatting/target" />
       <excludeFolder url="file://$MODULE_DIR$/rust-by-example/2_Primitives/Tuples/target" />
+      <excludeFolder url="file://$MODULE_DIR$/exercises/C_modules/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
