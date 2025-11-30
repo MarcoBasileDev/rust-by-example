@@ -1,5 +1,5 @@
-// Silence some warnings so they don't distract from the exercise.
 #![allow(dead_code, unused_variables)]
+use D_simple_types::{print_difference, print_array, ding, on_off, print_distance};
 
 fn main() {
     let coords: (f64, f64) = (6.3, 15.0);
@@ -16,31 +16,4 @@ fn main() {
     on_off(mess.2[1].0);
 
     print_distance(coords);
-}
-
-fn print_distance((x, y): (f64, f64)) {
-    println!(
-        "Distance to the origin is {}",
-        (x.powf(2.0) + y.powf(2.0)).sqrt()
-    );
-}
-
-fn print_difference(x: f64, y: f64) {
-    println!("Difference between {} and {} is {}", x, y, (x - y).abs());
-}
-
-fn print_array(a: [f64; 2]) {
-    println!("The coordinates are ({}, {})", a[0], a[1]);
-}
-
-fn ding(x: i32) {
-    if x == 13 {
-        println!("Ding, you found 13!");
-    }
-}
-
-fn on_off(val: bool) {
-    if val {
-        println!("Lights are on!");
-    }
 }
