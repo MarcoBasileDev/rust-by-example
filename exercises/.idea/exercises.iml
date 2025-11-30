@@ -8,12 +8,14 @@
       <sourceFolder url="file://$MODULE_DIR$/d_simple_types/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/e_control_flow/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/f_strings/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/g_ownership_references/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/a_variables/target" />
       <excludeFolder url="file://$MODULE_DIR$/b_functions/target" />
       <excludeFolder url="file://$MODULE_DIR$/c_modules/target" />
       <excludeFolder url="file://$MODULE_DIR$/d_simple_types/target" />
       <excludeFolder url="file://$MODULE_DIR$/e_control_flow/target" />
       <excludeFolder url="file://$MODULE_DIR$/f_strings/target" />
+      <excludeFolder url="file://$MODULE_DIR$/g_ownership_references/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
