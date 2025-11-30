@@ -10,6 +10,7 @@
       <sourceFolder url="file://$MODULE_DIR$/f_strings/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/g_ownership_references/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/h_structs/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/i_traits/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/a_variables/target" />
       <excludeFolder url="file://$MODULE_DIR$/b_functions/target" />
       <excludeFolder url="file://$MODULE_DIR$/c_modules/target" />
@@ -18,6 +19,7 @@
       <excludeFolder url="file://$MODULE_DIR$/f_strings/target" />
       <excludeFolder url="file://$MODULE_DIR$/g_ownership_references/target" />
       <excludeFolder url="file://$MODULE_DIR$/h_structs/target" />
+      <excludeFolder url="file://$MODULE_DIR$/i_traits/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
