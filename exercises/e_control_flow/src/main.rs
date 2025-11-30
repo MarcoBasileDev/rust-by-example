@@ -16,12 +16,11 @@ fn main() {
         count
     );
 
-    // 2. Use a `for` loop to iterate through integers from 7 to 23 *inclusive* using a range
-    // and add them all together (add each value to the `sum` variable).  Hint: You should get 255
-
     let mut sum = 0;
 
-    // (write the `for` loop here)
+    for num in 7..=23 {
+        sum += num;
+    }
 
     println!("The sum is {}", sum);
 
