@@ -93,6 +93,17 @@ fn main() -> Result<(), Box<dyn Error>> {
         }
         let _ = render_tx.send(curr_frame)?;
         thread::sleep(Duration::from_millis(1));
+
+        // Win or lose?
+        if invaders.all_killed() {
+            audio.play("win");
+            break 'game_loop;
+        }
+
+        if invaders.reached_bottom() {
+            audio.play("lose");
+            break 'game_loop;
+        }
     }
 
     // Cleanup
