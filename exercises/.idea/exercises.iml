@@ -13,6 +13,7 @@
       <sourceFolder url="file://$MODULE_DIR$/i_traits/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/j_collections/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/k_enums/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/space_invaders/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/a_variables/target" />
       <excludeFolder url="file://$MODULE_DIR$/b_functions/target" />
       <excludeFolder url="file://$MODULE_DIR$/c_modules/target" />
@@ -24,6 +25,7 @@
       <excludeFolder url="file://$MODULE_DIR$/i_traits/target" />
       <excludeFolder url="file://$MODULE_DIR$/j_collections/target" />
       <excludeFolder url="file://$MODULE_DIR$/k_enums/target" />
+      <excludeFolder url="file://$MODULE_DIR$/space_invaders/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
