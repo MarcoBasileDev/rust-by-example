@@ -81,6 +81,11 @@ fn main() -> Result<(), Box<dyn Error>> {
             audio.play("move");
         }
 
+        let hits: u16 = player.detect_hits(&mut invaders);
+        if hits > 0 {
+            audio.play("explode");
+        }
+
         // Draw & render
         let drawables: Vec<&dyn Drawable> = vec![&player, &invaders];
         for drawable in drawables {
