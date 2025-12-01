@@ -3,10 +3,12 @@
 fn main() {
     // 1. If `maybe_fruit` below is a `Some` variant, then print out the string it wraps. Use the
     // Option type's `is_some` and `unwrap` methods with an `if` expression to implement the logic.
-    // Then run your code. You should get the output "apple".
 
     let maybe_fruit: Option<&str> = Some("apple");
-    // if ...
+
+    if maybe_fruit.is_some() {
+        println!("{}", maybe_fruit.unwrap());
+    }
 
     // 2. Write a function `inspect` that accepts an `Option<&str>` as an argument and does not
     // return anything. Use an `if let` expression inside the function to get the value wrapped by
