@@ -7,7 +7,7 @@ use crossterm::cursor::{Hide, Show};
 use crossterm::event::{Event, KeyCode};
 use crossterm::terminal::{EnterAlternateScreen, LeaveAlternateScreen};
 use rusty_audio::Audio;
-use space_invaders::frame::Frame;
+use space_invaders::frame::{new_frame, Frame};
 use space_invaders::render;
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -29,7 +29,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Render loop in a separate thread
     let (render_tx, render_rx) = mpsc::channel();
     let render_handle = thread::spawn(move || {
-        let mut last_frame = Frame::new();
+        let mut last_frame = new_frame();
         let mut stdout = io::stdout();
         render::render(&mut stdout, &last_frame, &last_frame, true);
         loop {
@@ -45,6 +45,9 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     // Game Loop
     'game_loop: loop {
+        // Per-frame init
+        let curr_frame = new_frame();
+
         // Input handling
         while event::poll(Duration::default())? {
             if let Event::Key(key) = event::read()? {
@@ -57,9 +60,16 @@ fn main() -> Result<(), Box<dyn Error>> {
                 }
             }
         }
+
+        // Draw & render
+        let _ = render_tx.send(curr_frame)?;
+        thread::sleep(Duration::from_millis(1));
     }
 
     // Cleanup
+    drop(render_tx);
+    render_handle.join().unwrap();
+
     audio.wait();
     stdout.execute(Show)?;
     stdout.execute(LeaveAlternateScreen)?;
