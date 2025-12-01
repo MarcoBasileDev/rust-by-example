@@ -29,6 +29,14 @@ impl Snack {
             }
         }
     }
+
+    fn is_apple(&self) -> bool {
+        if let Snack::Apple = self {
+            true
+        } else {
+            false
+        }
+    }
 }
 
 fn main() {
@@ -141,18 +149,38 @@ fn main() {
     // the value is an `Apple` variant, and `false` otherwise. Then uncomment and run the code
     // below.
 
-    // let snacks = vec![Snack::Apple, Snack::Cookies(5), Snack::Apple];
-    // for (index, snack) in snacks.iter().enumerate() {
-    //     if snack.is_apple() {
-    //         println!("Snack {} is an apple.", index)
-    //     } else {
-    //         println!("Snack {} is NOT an apple.", index)
-    //     }
-    // }
+    let snacks = vec![Snack::Apple, Snack::Cookies(5), Snack::Apple];
+    for (index, snack) in snacks.iter().enumerate() {
+        if snack.is_apple() {
+            println!("Snack {} is an apple.", index)
+        } else {
+            println!("Snack {} is NOT an apple.", index)
+        }
+    }
 
     // Challenge 2: Refactor the code from (4) to put all off the variables into a vector, then loop
     // through the vector and use a `match` expression instead of `if let` statements. The output
     // should remain the same.
+
+    let snacks_challenge = vec![Snack::Apple, Snack::Cookies(18), Snack::Sandwich { lettuce: false, cheese: true }];
+    for snack in snacks_challenge {
+        match snack {
+            Snack::Apple => {
+                println!("The healthy snack is an apple.");
+            },
+            Snack::Cookies(num_cookies) => {
+                println!("The sugary snack is {} cookies", num_cookies);
+            },
+            Snack::Sandwich { lettuce, cheese } => {
+                let lettuce_msg = if lettuce { "does" } else { "does not" };
+                let cheese_msg = if cheese { "does" } else { "does not" };
+                println!(
+                    "The sandwich {} have lettuce and {} have cheese.",
+                    lettuce_msg, cheese_msg
+                );
+            }
+        }
+    }
 }
 
 fn do_math(x: i32) -> Result<i32, String> {
