@@ -7,8 +7,8 @@ use crossterm::cursor::{Hide, Show};
 use crossterm::event::{Event, KeyCode};
 use crossterm::terminal::{EnterAlternateScreen, LeaveAlternateScreen};
 use rusty_audio::Audio;
-use space_invaders::frame::{new_frame, Drawable, Frame};
-use space_invaders::{frame, player, render};
+use space_invaders::frame::{new_frame, Drawable};
+use space_invaders::render;
 use space_invaders::player::Player;
 
 fn main() -> Result<(), Box<dyn Error>> {
