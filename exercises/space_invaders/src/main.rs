@@ -8,6 +8,7 @@ use crossterm::event::{Event, KeyCode};
 use crossterm::terminal::{EnterAlternateScreen, LeaveAlternateScreen};
 use rusty_audio::Audio;
 use space_invaders::frame::{new_frame, Drawable};
+use space_invaders::invaders::Invaders;
 use space_invaders::render;
 use space_invaders::player::Player;
 
@@ -47,6 +48,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // Game Loop
     let mut player = Player::new();
     let mut instant = Instant::now();
+    let mut invaders = Invaders::new();
     'game_loop: loop {
         // Per-frame init
         let delta = instant.elapsed();
@@ -75,9 +77,15 @@ fn main() -> Result<(), Box<dyn Error>> {
 
         // Updates
         player.update(delta);
+        if invaders.update(delta) {
+            audio.play("move");
+        }
 
         // Draw & render
-        player.draw(&mut curr_frame);
+        let drawables: Vec<&dyn Drawable> = vec![&player, &invaders];
+        for drawable in drawables {
+            drawable.draw(&mut curr_frame);
+        }
         let _ = render_tx.send(curr_frame)?;
         thread::sleep(Duration::from_millis(1));
     }
