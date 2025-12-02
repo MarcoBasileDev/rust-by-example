@@ -109,9 +109,9 @@ impl Drawable for Invaders {
                 / self.move_timer.duration().as_secs_f32())
                 > 0.5
             {
-                "x"
+                "¤"
             } else {
-                "+"
+                "ψ"
             }
         }
     }
