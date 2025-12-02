@@ -8,27 +8,19 @@
 
 // Challenge: Clippy doesn't find *everything*. What else would you change to make this code better?
 
-const PI: f32 = std::f32::consts::PI;
 fn count_to_5() -> i32 {
-    let mut num = 0;
-
-    loop {
-        if num > PI as i32 && num > 5 {
-            break;
-        }
-        num += 1;
-    }
     5
 }
 
 fn main() {
     println!("I can count to {}", count_to_5());
 }
+
 #[cfg(test)]
 mod test {
     use super::*;
     #[test]
     fn test_counting() {
-        assert_eq!(count_to_5() == 5, true);
+        assert_eq!(count_to_5(), 5);
     }
 }
