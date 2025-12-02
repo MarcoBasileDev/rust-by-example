@@ -10,6 +10,12 @@ pub struct Player {
     shots: Vec<Shot>,
 }
 
+impl Default for Player {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Player {
     pub fn new() -> Self {
         Self {

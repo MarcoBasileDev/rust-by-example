@@ -91,7 +91,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         for drawable in drawables {
             drawable.draw(&mut curr_frame);
         }
-        let _ = render_tx.send(curr_frame)?;
+        render_tx.send(curr_frame)?;
         thread::sleep(Duration::from_millis(1));
 
         // Win or lose?
