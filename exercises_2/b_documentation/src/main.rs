@@ -1,3 +1,4 @@
+/// The exercise is in lib.rs this time!!!
 fn main() {
-    println!("Hello, world!");
+    println!("Go look in lib.rs ;-)");
 }
