@@ -33,7 +33,7 @@ fn main() {
     // Hint 2: `x` will be a mutable reference, so remember to dereference it to use it
 
     let mut numbers = vec![1, 2, 3, 4];
-    for x in numbers.iter_mut() {
+    for x in numbers.iter_mut() { //alternative: for x in &mut numbers
         *x *= 3 // multiply the value by 3 via the mutable reference x
     }
     println!("{:?}", numbers); // should print [3, 6, 9, 12]
