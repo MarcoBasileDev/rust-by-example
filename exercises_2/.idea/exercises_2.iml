@@ -4,8 +4,10 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/a_idiomatic/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/b_documentation/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/c_closures_and_iterators/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/a_idiomatic/target" />
       <excludeFolder url="file://$MODULE_DIR$/b_documentation/target" />
+      <excludeFolder url="file://$MODULE_DIR$/c_closures_and_iterators/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
