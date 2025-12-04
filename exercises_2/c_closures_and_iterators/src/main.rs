@@ -6,7 +6,7 @@ fn main() {
     // number multiplied by itself), and assign the closure to the "square" variable. Then run the
     // code and make sure it works.
 
-     let square = move |x| {x * x};
+     let square = |x| x * x;
      println!("5 squared is {}", square(5));
 
     // 2. Uncomment the code below.  Finish the .map() iterator adaptor call by passing it a closure
@@ -15,10 +15,17 @@ fn main() {
     // (0, 1), it should return (1, 1). Run the code and make sure it works.
 
     let pairs = vec![(0, 1), (2, 3), (4, 5)];
+
     pairs
         .into_iter()
         .map(|(x, y)| { (x + 1, y)})
         .for_each(|t| println!("{:?}", t));
+
+    // challenge
+    let pairs = vec![(0, 1), (2, 3), (4, 5)];
+    for (x, y) in pairs.into_iter() {
+        println!("{:?}", (x + 1, y));
+    }
 
     // 3. Uncomment the code below. There is a mutable vector named `numbers`. Use an iterator over
     // mutable references to multiply each of the values in `numbers` by 3.
@@ -30,6 +37,12 @@ fn main() {
         *x *= 3 // multiply the value by 3 via the mutable reference x
     }
     println!("{:?}", numbers); // should print [3, 6, 9, 12]
+
+    // challenge
+    let numbers = vec![1, 2, 3, 4];
+    let numbers: Vec<_> = numbers.into_iter().map(|x| x * 3).collect();
+    println!("{:?}", numbers);
+
 
     // 4. Uncomment the code below.  Take the vector of words and
     // - Convert the vector into an iterator with .into_iter()
