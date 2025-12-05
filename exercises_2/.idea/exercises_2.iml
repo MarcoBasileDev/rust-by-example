@@ -7,11 +7,13 @@
       <sourceFolder url="file://$MODULE_DIR$/c_closures_and_iterators/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/d_trait/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/e_error/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/f_testing/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/a_idiomatic/target" />
       <excludeFolder url="file://$MODULE_DIR$/b_documentation/target" />
       <excludeFolder url="file://$MODULE_DIR$/c_closures_and_iterators/target" />
       <excludeFolder url="file://$MODULE_DIR$/d_trait/target" />
       <excludeFolder url="file://$MODULE_DIR$/e_error/target" />
+      <excludeFolder url="file://$MODULE_DIR$/f_testing/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
