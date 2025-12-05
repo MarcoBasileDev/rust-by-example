@@ -7,6 +7,7 @@
       <sourceFolder url="file://$MODULE_DIR$/c_closures_and_iterators/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/d_trait/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/e_error/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/f_testing/benches" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/f_testing/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/f_testing/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/a_idiomatic/target" />

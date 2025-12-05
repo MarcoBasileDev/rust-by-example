@@ -35,6 +35,7 @@ mod test {
     fn second_test() {
         assert!(splish(100, 10) < 0);
         assert!(splish(40, 20) > 0);
+        assert!(splish(9, 3) == 0);
     }
 
     // 4. Write a test function that verifies the following conditions using the `assert!` macro
