@@ -1,13 +1,13 @@
 // START IN lib.rs!!!
 
-use frogger::Frog;
-
+use g_logging::Frog;
 // You did #1-#6 in lib.rs already, right?
 //
 // 7. Update Cargo.toml to add the `env_logger` dependency
 
 fn main() {
     // 8. Initialize env_logger using the init() function at the top level of the library
+    env_logger::init();
 
     // 9. Run this program with `cargo run` and take a look at the default output.
     // - Now run it again with an explicit log level, like `RUST_LOG=info cargo run`
