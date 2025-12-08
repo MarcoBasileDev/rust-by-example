@@ -97,5 +97,45 @@ fn main() {
     // On the child threads print out the values you receive. Close the sending side in the main
     // thread by calling `drop(tx)` (assuming you named your sender channel variable `tx`). Join
     // the child threads.
+
+    // Challenge solution:
+
+    // Create an unbounded channel
+    let (tx, rx) = channel::unbounded();
+
+    // Clone the receiver so each worker gets its own receiving end
+    let rx1 = rx.clone();
+    let rx2 = rx;
+
+    // Spawn worker 1
+    let handle_w1 = thread::spawn(move || {
+        for value in rx1 {
+            println!("Worker 1 received: {}", value);
+        }
+        println!("Worker 1: channel closed, exiting.");
+    });
+
+    // Spawn worker 2
+    let handle_w2 = thread::spawn(move || {
+        for value in rx2 {
+            println!("Worker 2 received: {}", value);
+        }
+        println!("Worker 2: channel closed, exiting.");
+    });
+
+    // Main thread sends several values
+    for i in 0..5 {
+        println!("Main thread: sending {}", i);
+        tx.send(i).unwrap();
+        sleep_ms(200);
+    }
+
+    // Close sending side
+    drop(tx);
+
+    // Join workers
+    handle_w1.join().unwrap();
+    handle_w2.join().unwrap();
+
     println!("Main thread: Exiting.")
 }
