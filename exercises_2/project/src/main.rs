@@ -17,5 +17,11 @@ fn main() {
         enemy_labels: Vec::new(),
         spawn_timer: Timer::from_seconds(10.0, TimerMode::Once),
     };
+    game.add_logic(game_logic);
     game.run(game_state);
+}
+
+fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
+    game_state.current_score += 1;
+    println!("Current score: {}", game_state.current_score);
 }
