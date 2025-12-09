@@ -21,15 +21,8 @@ impl Default for GameState {
 
 fn main() {
     let mut game = Game::new();
-
-    let game_state = GameState {
-        current_score: 0,
-        high_score: 2345,
-        enemy_labels: Vec::new(),
-        spawn_timer: Timer::from_seconds(10.0, TimerMode::Once),
-    };
     game.add_logic(game_logic);
-    game.run(game_state);
+    game.run(GameState::default());
 }
 
 fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
