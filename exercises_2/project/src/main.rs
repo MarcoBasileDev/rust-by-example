@@ -8,6 +8,17 @@ struct GameState {
     spawn_timer: Timer,
 }
 
+impl Default for GameState {
+    fn default() -> Self {
+        Self {
+            high_score: 0,
+            current_score: 0,
+            enemy_labels: Vec::new(),
+            spawn_timer: Timer::default(),
+        }
+    }
+}
+
 fn main() {
     let mut game = Game::new();
 
