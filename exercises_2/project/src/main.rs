@@ -21,6 +21,12 @@ impl Default for GameState {
 
 fn main() {
     let mut game = Game::new();
+
+    let player = game.add_sprite("player", SpritePreset::RacingCarBlue);
+    player.translation = Vec2::new(0.0, 0.0);
+    player.rotation = SOUTH_WEST;
+    player.scale = 1.0;
+
     game.add_logic(game_logic);
     game.run(GameState::default());
 }
