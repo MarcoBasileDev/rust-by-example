@@ -24,6 +24,11 @@ impl Default for GameState {
 fn main() {
     let mut game = Game::new();
 
+    game.window_settings(Window {
+        title: "Game named Game".into(),
+        ..Default::default()
+    });
+
     game.audio_manager.play_music(MusicPreset::WhimsicalPopsicle, 0.1);
 
     let player = game.add_sprite("player", SpritePreset::RacingCarBlue);
@@ -49,8 +54,9 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
     }
 
     // keep text near the edges of the screen
+    let offset = ((engine.time_since_startup_f64 * 3.0).cos() * 5.0) as f32;
     let score = engine.texts.get_mut("score").unwrap();
-    score.translation.x = engine.window_dimensions.x / 2.0 - 80.0;
+    score.translation.x = engine.window_dimensions.x / 2.0 - 80.0 + offset;
     score.translation.y = engine.window_dimensions.y / 2.0 - 30.0;
 
     let high_score = engine.texts.get_mut("high_score").unwrap();
