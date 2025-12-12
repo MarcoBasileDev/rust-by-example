@@ -107,17 +107,6 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
         player.translation.x += MOVEMENT_SPEED * engine.delta_f32;
     }
 
-    // handle mouse input
-    if engine.mouse_state.just_pressed(MouseButton::Left) {
-        if let Some(mouse_location) = engine.mouse_state.location() {
-            let label = format!("ferris{}", game_state.ferris_index);
-            game_state.ferris_index += 1;
-            let feris = engine.add_sprite(label.clone(), SpritePreset::RacingCarYellow);
-            feris.translation = mouse_location;
-            feris.collision = true;
-        }
-    }
-
     if game_state.spawn_timer.tick(engine.delta).just_finished() {
         let label = format!("ferris{}", game_state.ferris_index);
         game_state.ferris_index += 1;
