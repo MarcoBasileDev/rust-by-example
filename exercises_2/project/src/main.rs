@@ -1,3 +1,5 @@
+use rand::prelude::*;
+use rand::rng;
 use rusty_engine::prelude::*;
 
 #[derive(Resource)]
@@ -14,7 +16,7 @@ impl Default for GameState {
             score: 0,
             high_score: 0,
             ferris_index: 0,
-            spawn_timer: Timer::default(),
+            spawn_timer: Timer::from_seconds(2.0, TimerMode::Repeating),
         }
     }
 }
@@ -90,10 +92,19 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
         if let Some(mouse_location) = engine.mouse_state.location() {
             let label = format!("ferris{}", game_state.ferris_index);
             game_state.ferris_index += 1;
-            let feris = engine.add_sprite(label.clone(), SpritePreset::RacingCarBlue);
+            let feris = engine.add_sprite(label.clone(), SpritePreset::RacingCarYellow);
             feris.translation = mouse_location;
             feris.collision = true;
         }
+    }
+
+    if game_state.spawn_timer.tick(engine.delta).just_finished() {
+        let label = format!("ferris{}", game_state.ferris_index);
+        game_state.ferris_index += 1;
+        let feris = engine.add_sprite(label.clone(), SpritePreset::RacingCarYellow);
+        feris.translation.x = rng().random_range(-550.0..550.0);
+        feris.translation.y = rng().random_range(-325.0..325.0);
+        feris.collision = true;
     }
 
     // Reset score
