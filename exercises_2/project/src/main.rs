@@ -43,6 +43,11 @@ fn main() {
 }
 
 fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
+    // quit if Q is pressed
+    if engine.keyboard_state.just_pressed(KeyCode::Q) {
+        engine.should_exit = true;
+    }
+
     // handle collision
     for event in engine.collision_events.drain(..) {
         if event.state == CollisionState::Begin  && event.pair.one_starts_with("player") {
