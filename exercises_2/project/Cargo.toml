@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 rusty_engine = "6.0.0"
+rand = "0.10.0-rc.5"
 
 # Make dev profile act like release
 [profile.dev]
