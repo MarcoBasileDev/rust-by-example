@@ -37,11 +37,23 @@ fn main() {
 }
 
 fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
-    // game_state.current_score += 1;
-    // println!("Current score: {}", game_state.current_score);
+
     for event in engine.collision_events.drain(..) {
-        println!("{:?}", event);
+
+        if event.state == CollisionState::Begin  && event.pair.one_starts_with("player") {
+
+            // remove the sprite the player collided with
+            for label in [event.pair.0, event.pair.1] {
+                if label != "player" {
+                    engine.sprites.remove(&label);
+                }
+            }
+            
+            game_state.current_score += 1;
+            println!("Current score: {}", game_state.current_score);
+        }
     }
+
     let player = engine.sprites.get_mut("player").unwrap();
     player.translation.x += 100.0 * engine.delta_f32;
 }
