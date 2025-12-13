@@ -30,7 +30,7 @@ fn main() {
     // Create the road lines
     for i in 0..10 {
         let roadline = game.add_sprite(format!("roadline{}", i), SpritePreset::RacingBarrierWhite);
-        roadline.scale = 0.1;
+        roadline.scale = 0.2;
         roadline.translation.x = -600.0 + 150.0 * i as f32;
     }
 
@@ -39,6 +39,7 @@ fn main() {
 }
 
 const PLAYER_SPEED: f32 = 250.0;
+const ROAD_SPEED: f32 = 400.0;
 
 fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
     // quit if Q is pressed
@@ -47,16 +48,16 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
     }
 
     let mut direction = 0.0;
-    if engine.keyboard_state.just_pressed(KeyCode::Up) {
+    if engine.keyboard_state.pressed(KeyCode::Up) {
         direction += 1.0;
     }
-    if engine.keyboard_state.just_pressed(KeyCode::Down) {
+    if engine.keyboard_state.pressed(KeyCode::Down) {
         direction -= 1.0;
     }
 
     // Move the player sprite
     let player1 = engine.sprites.get_mut("player1").unwrap();
-    player1.translation.y = direction * PLAYER_SPEED * engine.delta_f32;
+    player1.translation.y += direction * PLAYER_SPEED * engine.delta_f32;
     player1.rotation = direction * 0.15;
     if player1.translation.y < -360.0 || player1.translation.y > 360.0 {
         game_state.health_amount = 0;
