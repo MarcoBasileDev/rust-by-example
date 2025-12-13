@@ -1,4 +1,6 @@
 use rusty_engine::prelude::*;
+use rand::prelude::*;
+use rand::rng;
 
 #[derive(Resource)]
 struct GameState {
@@ -34,6 +36,22 @@ fn main() {
         roadline.translation.x = -600.0 + 150.0 * i as f32;
     }
 
+    // Create obstacles
+    let obstacle_presets = vec![
+        SpritePreset::RacingBarrelBlue,
+        SpritePreset::RacingBarrelRed,
+        SpritePreset::RacingCarGreen,
+        SpritePreset::RacingConeStraight,
+        SpritePreset::RacingCarBlack,
+    ];
+    for (i, preset) in obstacle_presets.into_iter().enumerate() {
+        let obstacle = game.add_sprite(format!("obstacle{}", i), preset);
+        obstacle.layer = 5.0;
+        obstacle.collision = true;
+        obstacle.translation.x = rng().random_range(800.0..1600.0);
+        obstacle.translation.y = rng().random_range(-300.0..300.0);
+    }
+
     game.add_logic(game_logic);
     game.run(GameState::default());
 }
@@ -63,13 +81,19 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
         game_state.health_amount = 0;
     }
 
-
     // Move road objects
     for sprite in engine.sprites.values_mut() {
         if sprite.label.starts_with("roadline") {
             sprite.translation.x -= ROAD_SPEED * engine.delta_f32;
             if sprite.translation.x < -672.0 {
                 sprite.translation.x += 1500.0;
+            }
+        }
+        if sprite.label.starts_with("obstacle") {
+            sprite.translation.x -= ROAD_SPEED * engine.delta_f32;
+            if sprite.translation.x < -800.0 {
+                sprite.translation.x = rng().random_range(800.0..1600.0);
+                sprite.translation.y = rng().random_range(-300.0..300.0);
             }
         }
     }
