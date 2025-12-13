@@ -69,6 +69,11 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
         engine.should_exit = true;
     }
 
+    // Don't run any more game logic if the game has ended
+    if game_state.lost {
+        return;
+    }
+
     let mut direction = 0.0;
     if engine.keyboard_state.pressed(KeyCode::Up) {
         direction += 1.0;
@@ -114,5 +119,13 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
             health_message.value = format!("Health: {}", game_state.health_amount);
             engine.audio_manager.play_sfx(SfxPreset::Impact3, 0.5);
         }
+    }
+
+    if game_state.health_amount == 0 {
+        game_state.lost = true;
+        let game_over = engine.add_text("game over", "Game Over");
+        game_over.font_size = 128.0;
+        engine.audio_manager.stop_music();
+        engine.audio_manager.play_sfx(SfxPreset::Jingle3, 0.5);
     }
 }
