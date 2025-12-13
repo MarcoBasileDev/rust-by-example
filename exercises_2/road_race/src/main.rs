@@ -52,6 +52,10 @@ fn main() {
         obstacle.translation.y = rng().random_range(-300.0..300.0);
     }
 
+    // Create the health message
+    let health_message = game.add_text("health_message", "Health: 5");
+    health_message.translation = Vec2::new(550.0, 320.0);
+
     game.add_logic(game_logic);
     game.run(GameState::default());
 }
@@ -95,6 +99,20 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
                 sprite.translation.x = rng().random_range(800.0..1600.0);
                 sprite.translation.y = rng().random_range(-300.0..300.0);
             }
+        }
+    }
+
+    // Deal with collisions
+    let health_message = engine.texts.get_mut("health_message").unwrap();
+    for event in engine.collision_events.drain(..) {
+        // We don't care if obstacles collide with each other or collisions end
+        if !event.pair.either_contains("player1") || event.state.is_end() {
+            continue;
+        }
+        if game_state.health_amount > 0 {
+            game_state.health_amount -= 1;
+            health_message.value = format!("Health: {}", game_state.health_amount);
+            engine.audio_manager.play_sfx(SfxPreset::Impact3, 0.5);
         }
     }
 }
