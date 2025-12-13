@@ -27,6 +27,13 @@ fn main() {
     // Start some background music
     game.audio_manager.play_music(MusicPreset::WhimsicalPopsicle, 0.1);
 
+    // Create the road lines
+    for i in 0..10 {
+        let roadline = game.add_sprite(format!("roadline{}", i), SpritePreset::RacingBarrierWhite);
+        roadline.scale = 0.1;
+        roadline.translation.x = -600.0 + 150.0 * i as f32;
+    }
+
     game.add_logic(game_logic);
     game.run(GameState::default());
 }
