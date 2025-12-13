@@ -62,4 +62,15 @@ fn game_logic(engine: &mut Engine, game_state: &mut GameState) {
     if player1.translation.y < -360.0 || player1.translation.y > 360.0 {
         game_state.health_amount = 0;
     }
+
+
+    // Move road objects
+    for sprite in engine.sprites.values_mut() {
+        if sprite.label.starts_with("roadline") {
+            sprite.translation.x -= ROAD_SPEED * engine.delta_f32;
+            if sprite.translation.x < -672.0 {
+                sprite.translation.x += 1500.0;
+            }
+        }
+    }
 }
