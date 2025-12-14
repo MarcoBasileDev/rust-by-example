@@ -28,6 +28,8 @@ impl Account {
 
 fn main() {
     let bank = Bank::new();
+    let account = Account::new(1, String::from("Me"));
 
     println!("Bank {:#?}", bank);
+    println!("Account {:#?}", account);
 }
