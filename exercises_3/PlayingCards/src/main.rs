@@ -14,8 +14,7 @@ impl Deck {
                 cards.push(format!("{} of {}",value, suit));
             }
         }
-        let deck = Deck { cards };
-        deck
+        Deck { cards }
     }
 }
 
