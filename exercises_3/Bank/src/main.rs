@@ -10,6 +10,24 @@ struct Bank {
     accounts: Vec<Account>,
 }
 
+impl Bank {
+    fn new() -> Self {
+        Bank { accounts: Vec::new() }
+    }
+}
+
+impl Account {
+    fn new(id: u32, holder: String) -> Self {
+        Account {
+            id,
+            holder,
+            balance: 0,
+        }
+    }
+}
+
 fn main() {
-    println!("Hello, world!");
+    let bank = Bank::new();
+
+    println!("Bank {:#?}", bank);
 }
