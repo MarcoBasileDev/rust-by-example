@@ -4,7 +4,17 @@ struct Deck {
 }
 
 fn main() {
-    let deck = Deck { cards: Vec::new() };
+    let suits = ["Hearts", "Spades", "Diamonds"];
+    let values = ["Ace", "Two", "Three"];
+
+    let mut deck = Deck { cards: Vec::new() };
+
+    for suit in &suits {
+        for value in &values {
+            deck.cards.push(format!("{} of {}",value, suit));
+        }
+    }
+
 
     println!("Here's your deck: {:?}", deck);
 }
