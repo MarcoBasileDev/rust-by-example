@@ -22,6 +22,10 @@ impl Bank {
     fn total_balance(&self) -> i32 {
         self.accounts.iter().map(|account| account.balance).sum()
     }
+
+    fn summary(&self) -> Vec<String> {
+        self.accounts.iter().map(|account| account.summary()).collect()
+    }
 }
 
 impl Account {
@@ -58,5 +62,9 @@ fn main() {
     bank.add_account(account);
     println!("{:#?}",bank);
 
+    let account = Account::new(2, String::from("test2"));
+    bank.add_account(account);
+
+    println!("{:?}", bank.summary());
     println!("Total account balance inside bank is {:?}",bank.total_balance());
 }
