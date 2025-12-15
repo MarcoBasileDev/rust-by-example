@@ -36,6 +36,10 @@ impl Account {
     fn withdraw(&mut self, amount: i32) {
         self.balance -= amount;
     }
+
+    fn summary(&self) -> String {
+        format!("{} has a balance {}", self.holder, self.balance)
+    }
 }
 
 fn main() {
@@ -45,7 +49,8 @@ fn main() {
     account.deposit(500);
     account.withdraw(250);
 
-    bank.add_account(account);
-    println!("{:?}", bank);
+    println!("{}", account.summary());
 
+    bank.add_account(account);
+    println!("{:#?}",bank);
 }
