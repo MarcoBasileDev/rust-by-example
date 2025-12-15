@@ -18,6 +18,10 @@ impl Bank {
     fn add_account(&mut self, account: Account) {
         self.accounts.push(account);
     }
+
+    fn total_balance(&self) -> i32 {
+        self.accounts.iter().map(|account| account.balance).sum()
+    }
 }
 
 impl Account {
@@ -53,4 +57,6 @@ fn main() {
 
     bank.add_account(account);
     println!("{:#?}",bank);
+
+    println!("Total account balance inside bank is {:?}",bank.total_balance());
 }
