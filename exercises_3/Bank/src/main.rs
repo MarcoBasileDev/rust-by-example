@@ -14,6 +14,10 @@ impl Bank {
     fn new() -> Self {
         Bank { accounts: Vec::new() }
     }
+
+    fn add_account(&mut self, account: Account) {
+        self.accounts.push(account);
+    }
 }
 
 impl Account {
@@ -26,27 +30,11 @@ impl Account {
     }
 }
 
-fn print_account(account: &Account){
-    println!("Here's your account: {:#?}", account)
-}
-
-fn change_account_balance(account: &mut Account) {
-    account.balance = 10;
-    println!("Here's your new balance: {:#?}", account)
-}
-
-fn add_account(bank: &mut Bank, account: Account) {
-    bank.accounts.push(account);
-}
-
 fn main() {
     let mut bank = Bank::new();
-    let mut account = Account::new(1, String::from("Me"));
+    let account = Account::new(1, String::from("test"));
 
-    print_account(&account);
+    bank.add_account(account);
+    println!("{:?}", bank);
 
-    change_account_balance(&mut account);
-
-    add_account(&mut bank, account);
-    println!("Bank {:#?}", bank);
 }
