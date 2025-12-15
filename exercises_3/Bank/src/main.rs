@@ -26,6 +26,11 @@ impl Account {
     }
 }
 
+fn print_account(account: Account) -> Account{
+    println!("Here's your account: {:#?}", account);
+    account
+}
+
 fn main() {
     let bank = Bank::new();
     let account = Account::new(1, String::from("Me"));
