@@ -1,8 +1,20 @@
+use std::fmt::format;
+
 #[derive(Debug)]
 enum Media {
     Book { title: String , author: String },
     Movie { title: String, director: String },
     Audiobook { title: String },
+}
+
+impl Media {
+    fn desription(&self) -> String {
+        match self {
+            Media::Book { title, author } => format!("Book: {} {}", title, author),
+            Media::Movie { title, director } => format!("Movie: {} {}", title, director),
+            Media::Audiobook { title } => format!("Audiobook: {}", title),
+        }
+    }
 }
 
 fn print_media(media: &Media) {
@@ -26,4 +38,9 @@ fn main() {
         director: String::from("Movie director"),
     };
     print_media(&movie);
+
+    println!("{}", audiobook.desription());
+    println!("{}", book.desription());
+    println!("{}", movie.desription());
+
 }
