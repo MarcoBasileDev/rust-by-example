@@ -1,5 +1,3 @@
-use std::fmt::format;
-
 #[derive(Debug)]
 enum Media {
     Book { title: String , author: String },
