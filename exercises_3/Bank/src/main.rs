@@ -36,8 +36,6 @@ fn main() {
 
     println!("Bank {:#?}", bank);
 
-    let account_reference = &account;
-
-    print_account(account_reference);
+    print_account(&account);
     println!("Account {:#?}", account);
 }
