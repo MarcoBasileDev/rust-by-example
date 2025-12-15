@@ -26,9 +26,8 @@ impl Account {
     }
 }
 
-fn print_account(account: Account) -> Account{
-    println!("Here's your account: {:#?}", account);
-    account
+fn print_account(account: &Account){
+    println!("Here's your account: {:#?}", account)
 }
 
 fn main() {
@@ -37,7 +36,8 @@ fn main() {
 
     println!("Bank {:#?}", bank);
 
-    account = print_account(account);
-    account = print_account(account);
+    let account_reference = &account;
+
+    print_account(account_reference);
     println!("Account {:#?}", account);
 }
