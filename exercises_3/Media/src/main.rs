@@ -86,10 +86,9 @@ fn main() {
 
     println!("{:#?}", catalog);
 
-    if let Some(value) = catalog.get_by_index(3) {
-        println!("{:#?}", value)
-    } else {
-        println!("Nothing found")
+    match catalog.get_by_index(3) {
+        Some(media_item) => print_media(&media_item),
+        None => println!("No items found in catalog!"),
     }
 
 }
