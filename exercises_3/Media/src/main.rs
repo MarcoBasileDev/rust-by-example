@@ -33,20 +33,14 @@ impl Catalog {
         self.items.push(item);
     }
 
-    fn get_by_index(&self, index: usize) -> MightHaveAValue {
+    fn get_by_index(&self, index: usize) -> Option<&Media> {
         if self.items.len() < index {
-            MightHaveAValue::NoValueAvailable
+            None
         } else {
-            MightHaveAValue::ThereIsAValue(&self.items[index])
+            Some(&self.items[index])
         }
 
     }
-}
-
-#[derive(Debug)]
-enum MightHaveAValue<'a> {
-    ThereIsAValue(&'a Media),
-    NoValueAvailable,
 }
 
 fn print_media(media: &Media) {
@@ -92,7 +86,10 @@ fn main() {
 
     println!("{:#?}", catalog);
 
-    let item = catalog.get_by_index(100);
-    println!("{:#?}", item);
+    if let Some(value) = catalog.get_by_index(3) {
+        println!("{:#?}", value)
+    } else {
+        println!("Nothing found")
+    }
 
 }
