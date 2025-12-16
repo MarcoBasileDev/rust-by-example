@@ -32,6 +32,10 @@ impl Catalog {
     fn add(&mut self, item: Media) {
         self.items.push(item);
     }
+
+    fn get_by_index(&self, index: usize) -> &Media {
+        &self.items[index]
+    }
 }
 
 fn print_media(media: &Media) {
@@ -76,5 +80,8 @@ fn main() {
     catalog.add(placeholder);
 
     println!("{:#?}", catalog);
+
+    let item = catalog.get_by_index(3);
+    print_media(&item);
 
 }
