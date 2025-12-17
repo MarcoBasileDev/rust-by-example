@@ -17,7 +17,7 @@ fn main() {
     match fs::read_to_string("logs.txt") {
         Ok(content) => {
             let error_logs = extract_errors(&content);
-            println!("{:#?}", error_logs);
+            fs::write("errors.txt", error_logs.join("\n")).expect("failed to read logs.txt");
         },
         Err(e) => {
             println!("Failed to read file: {}", e);
