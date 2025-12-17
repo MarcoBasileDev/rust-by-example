@@ -5,6 +5,22 @@ fn main() {
     let text = fs::read_to_string("logs.txt");
 
     println!("{:#?}", text);
+
+    match divide(5.0, 0.0) {
+        Ok(result) => {
+            println!("Result: {}", result);
+        },
+        Err(e) => {
+            println!("Error: {}", e);
+        }
+    }
+
+    match verify_email("example@email".to_string()) {
+        Ok(_result) => {},
+        Err(e) => {
+            println!("Error: {}", e);
+        }
+    }
 }
 
 fn divide(a: f64, b: f64) -> Result<f64, Error> {
@@ -12,5 +28,14 @@ fn divide(a: f64, b: f64) -> Result<f64, Error> {
         Err(Error::other("can't divide by zero"))
     } else {
         Ok(a / b)
+    }
+}
+
+// If in your Ok case you don't have anything to return, just return an empty tuple
+fn verify_email(email: String) -> Result<(), Error> {
+    if email.contains("@") {
+        Ok(())
+    } else {
+        Err(Error::other("email must contain an @"))
     }
 }
