@@ -4,11 +4,11 @@ fn print_elements(elements: &Vec<String>) {
     }
 }
 
-fn print_elements_iterator(elements: &Vec<String>) {
+fn print_elements_iterator(elements: &[String]) {
     elements.iter().for_each(|element| { println!("{}", element); });
 }
 
-fn print_elements_two_times(elements: &Vec<String>) {
+fn print_elements_two_times(elements: &[String]) {
     elements
         .iter()
         .map(|element| format!("{} {}", element, element))
@@ -25,5 +25,6 @@ fn main() {
 
     print_elements(&colors);
     print_elements_iterator(&colors);
+    print_elements_iterator(&colors[1..3]);
     print_elements_two_times(&colors);
 }
