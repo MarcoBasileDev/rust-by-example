@@ -2,9 +2,14 @@ use std::fs;
 use std::io::{Error};
 
 fn main() {
-    let text = fs::read_to_string("logs.txt");
-
-    println!("{:#?}", text);
+    match fs::read_to_string("logs.txt") {
+        Ok(content) => {
+            println!("{}", content.len());
+        },
+        Err(e) => {
+            println!("Failed to read file: {}", e);
+        }
+    }
 
     match divide(5.0, 0.0) {
         Ok(result) => {
