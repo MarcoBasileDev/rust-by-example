@@ -30,6 +30,10 @@ fn in_place_to_uppercase(elements: &mut Vec<String>) {
     elements.iter_mut().for_each(|element| { element.make_ascii_uppercase(); });
 }
 
+fn move_elements(vec_a: Vec<String>, vec_b: &mut Vec<String>) {
+    vec_a.into_iter().for_each(|element| { vec_b.push(element); });
+}
+
 fn main() {
     let mut colors = vec![
         String::from("red"),
@@ -51,4 +55,8 @@ fn main() {
 
     in_place_to_uppercase(&mut colors);
     print_elements_iterator(&mut colors);
+
+    let mut destination = vec![];
+    move_elements(uppercase_vec, &mut destination);
+    println!("Destination {:#?}", &destination);
 }
