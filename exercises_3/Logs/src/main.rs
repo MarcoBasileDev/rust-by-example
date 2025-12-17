@@ -1,10 +1,23 @@
 use std::fs;
 use std::io::{Error};
 
+fn extract_errors(text: &str) -> Vec<&str> {
+    let split_text = text.split("\n");
+    let mut result = vec![];
+
+    for line in split_text {
+        if line.starts_with("ERROR") {
+            result.push(line);
+        }
+    }
+    result
+}
+
 fn main() {
     match fs::read_to_string("logs.txt") {
         Ok(content) => {
-            println!("{}", content.len());
+            let error_logs = extract_errors(&content);
+            println!("{:#?}", error_logs);
         },
         Err(e) => {
             println!("Failed to read file: {}", e);
