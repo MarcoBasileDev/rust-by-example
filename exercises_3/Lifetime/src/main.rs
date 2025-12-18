@@ -26,6 +26,26 @@ fn longest_language<'a>(lang_a: &'a str, lang_b: &'a str) -> &'a str {
     }
 }
 
+fn longest_language_in_list(languages: &[String]) -> &str {
+    let mut longest = &languages[0];
+
+    for lang in languages.iter().skip(1) {
+        if lang.len() > longest.len() {
+            longest = lang;
+        }
+    }
+
+    longest
+
+    //other approach
+    // languages
+    //     .iter()
+    //     .map(|s| s.as_str())
+    //     .max_by_key(|s| s.len())
+    //     .unwrap()
+}
+
+
 fn main() {
     let languages = vec![
         String::from("rust"),
@@ -41,4 +61,8 @@ fn main() {
 
     let longest = longest_language("go", "Rust");
     println!("{}", longest);
+
+    let longest = longest_language_in_list(&languages);
+    println!("{}", longest);
+
 }
