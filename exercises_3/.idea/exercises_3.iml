@@ -7,12 +7,14 @@
       <sourceFolder url="file://$MODULE_DIR$/Logs/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Media/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/PlayingCards/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Generics/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Lifetime/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Bank/target" />
       <excludeFolder url="file://$MODULE_DIR$/Iters/target" />
       <excludeFolder url="file://$MODULE_DIR$/Logs/target" />
       <excludeFolder url="file://$MODULE_DIR$/Media/target" />
       <excludeFolder url="file://$MODULE_DIR$/PlayingCards/target" />
+      <excludeFolder url="file://$MODULE_DIR$/Generics/target" />
       <excludeFolder url="file://$MODULE_DIR$/Lifetime/target" />
     </content>
     <orderEntry type="inheritedJdk" />
