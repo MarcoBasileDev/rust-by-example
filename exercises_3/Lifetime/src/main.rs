@@ -37,7 +37,7 @@ fn longest_language_in_list(languages: &[String]) -> &str {
 
     longest
 
-    //other approach
+    // Idiomatic implementation
     // languages
     //     .iter()
     //     .map(|s| s.as_str())
