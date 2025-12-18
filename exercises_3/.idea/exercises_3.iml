@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/PlayingCards/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Generics/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Lifetime/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/ShoppingCart/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Bank/target" />
       <excludeFolder url="file://$MODULE_DIR$/Iters/target" />
       <excludeFolder url="file://$MODULE_DIR$/Logs/target" />
@@ -16,6 +17,7 @@
       <excludeFolder url="file://$MODULE_DIR$/PlayingCards/target" />
       <excludeFolder url="file://$MODULE_DIR$/Generics/target" />
       <excludeFolder url="file://$MODULE_DIR$/Lifetime/target" />
+      <excludeFolder url="file://$MODULE_DIR$/ShoppingCart/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
