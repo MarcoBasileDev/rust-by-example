@@ -1,7 +1,14 @@
+use num_traits::ToPrimitive;
+
 fn solve(a: f64, b: f64) -> f64 {
     (a.powi(2) + b.powi(2)).sqrt()
 }
 
 fn main() {
-    println!("{}", solve(3.0, 4.0));
+    let a: f32 = 3.0;
+    let b = 4.0;
+
+    let a_f64 = a.to_f64().unwrap();
+
+    println!("{}", solve(a_f64, b));
 }
