@@ -6,7 +6,10 @@ use axum::routing::get;
 #[tokio::main]
 async fn main() {
     let listener = tokio::net::TcpListener::bind("127.0.0.1:8080").await.unwrap();
-    let app = Router::new().route("/", get(home));
+    let app = Router::new()
+        .route("/", get(home))
+        .route("/create", get(create_todo))
+        .route("/todos", get(todos));
 
     axum::serve(listener, app).await.unwrap();
 }
@@ -15,6 +18,26 @@ async fn home() -> impl IntoResponse {
     let html = HomeTemplate{
         title: "Todo App | Home",
         }
+        .render()
+        .unwrap();
+
+    Html(html)
+}
+
+async fn create_todo() -> impl IntoResponse {
+    let html = CreateTemplate{
+        title: "Todo App | Create",
+        }
+        .render()
+        .unwrap();
+
+    Html(html)
+}
+
+async fn todos() -> impl IntoResponse {
+    let html = TodosTemplate{
+        title: "Todo App | List",
+    }
         .render()
         .unwrap();
 
