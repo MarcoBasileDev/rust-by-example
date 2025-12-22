@@ -20,84 +20,64 @@ async fn main() {
 
     axum::serve(listener, app).await.unwrap();
 }
+struct HtmlTemplate<T>(T);
+
+impl<T: askama::Template> IntoResponse for HtmlTemplate<T> {
+    fn into_response(self) -> axum::response::Response {
+        match self.0.render() {
+            Ok(html) => Html(html).into_response(),
+            Err(_) => axum::http::StatusCode::INTERNAL_SERVER_ERROR.into_response(),
+        }
+    }
+}
 
 async fn home() -> impl IntoResponse {
-    let html = HomeTemplate {
-        title: "Home",
-        }
-        .render()
-        .unwrap();
-
-    Html(html)
+    HtmlTemplate(HomeTemplate {  title: "Home" })
 }
 
 async fn create_todo() -> impl IntoResponse {
-    let html = CreateTemplate  {
-        title: "Create",
-        }
-        .render()
-        .unwrap();
-
-    Html(html)
+    HtmlTemplate(CreateTemplate  { title: "Create" })
 }
 
 async fn todos() -> impl IntoResponse {
-    let html = TodosTemplate {
-        title: "List",
-    }
-        .render()
-        .unwrap();
-
-    Html(html)
+    HtmlTemplate(TodosTemplate { title: "List" })
 }
 
 async fn login_handler() -> impl IntoResponse {
-    let html = LoginTemplate {
-        title: "Log in",
-    }
-        .render()
-        .unwrap();
-
-    Html(html)
+    HtmlTemplate(LoginTemplate { title: "Log in" })
 }
 
 async fn signup_handler() -> impl IntoResponse {
-    let html = SignupTemplate {
-        title: "Sign up",
-    }
-        .render()
-        .unwrap();
-
-    Html(html)
+    HtmlTemplate(SignupTemplate { title: "Sign up" })
 }
 
 #[derive(Template)]
 #[template(path = "pages/home.html")]
-struct HomeTemplate {
-    title: &'static str,
+struct HomeTemplate<'a> {
+    title: &'a str,
 }
 
 #[derive(Template)]
 #[template(path = "pages/todos.html")]
-struct TodosTemplate {
-    title: &'static str,
+struct TodosTemplate<'a> {
+    title: &'a str,
 }
 
 #[derive(Template)]
 #[template(path = "pages/create.html")]
-struct CreateTemplate {
-    title: &'static str,
+struct CreateTemplate<'a> {
+    title: &'a str,
 }
 
 #[derive(Template)]
 #[template(path = "pages/log-in.html")]
-struct LoginTemplate {
-    title: &'static str,
+struct LoginTemplate<'a> {
+    title: &'a str,
 }
 
 #[derive(Template)]
 #[template(path = "pages/sign-up.html")]
-struct SignupTemplate {
-    title: &'static str,
+struct SignupTemplate<'a> {
+    title: &'a str,
 }
 
