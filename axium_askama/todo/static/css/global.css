@@ -1,145 +1,219 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&display=swap');
 
+/* ================= RESET ================= */
 *,
 *::before,
 *::after {
-    padding: 0;
     margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+/* ================= THEME ================= */
 :root {
-    color: rgb(75, 75, 75)
+    --bg-main: #faf7f2;
+    --bg-header: #ffffffcc;
+    --accent: #6d5dfc;
+    --accent-hover: #5a4ae3;
+    --text-main: #2d2d2d;
+    --text-muted: #6b6b6b;
+    --success: #4caf84;
+    --error: #e86a6a;
+    --info: #6f82ff;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    --shadow-sm: 0 2px 6px rgba(0,0,0,.08);
+    --shadow-md: 0 8px 24px rgba(0,0,0,.12);
 }
 
+/* ================= BASE ================= */
 body {
     font-family: "Inter", sans-serif;
-    background-color: rgb(255, 246, 226);
-    width: 100%;
-    height: 100vh;
-    font-weight: 400;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    min-height: 100vh;
+
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
 }
 
+/* ================= HEADER / NAV ================= */
 header {
+    position: sticky;
+    top: 0;
     width: 100%;
-    height: 80px;
-    background-color: rgb(115, 168, 144);
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-main {
-    width: 900px;
-    padding-top: 40px;
+    backdrop-filter: blur(10px);
+    background-color: var(--bg-header);
+    box-shadow: var(--shadow-sm);
+    z-index: 50;
 }
 
 nav {
-    width: 1000px;
-    height: inherit;
-    font-size: 1.5rem;
+    max-width: 1200px;
+    height: 72px;
+    margin: 0 auto;
+    padding: 0 24px;
+
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
-a {
+/* ================= NAV LINKS ================= */
+nav > a,
+nav > form > button {
+    position: relative;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-main);
     text-decoration: none;
+
+    padding: 8px 14px;
+    border-radius: var(--radius-sm);
+    transition: all .25s ease;
 }
 
-nav>a {
-    color: white;
-    height: inherit;
-    width: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 20px;
+/* underline animation */
+nav > a::after,
+nav > form > button::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent);
+    transition: all .25s ease;
+    transform: translateX(-50%);
 }
 
-nav>form>button {
+nav > a:hover::after,
+nav > form > button:hover::after {
+    width: 60%;
+}
+
+nav > a:hover,
+nav > form > button:hover {
+    color: var(--accent);
+}
+
+/* button reset */
+nav > form > button {
+    background: none;
     border: none;
-    background-color: transparent;
-    color: white;
-    width: 120px;
     cursor: pointer;
-    height: 80px;
-    font-size: 1.5rem;
 }
 
+/* ================= MAIN ================= */
+main {
+    width: 100%;
+    max-width: 900px;
+    padding: 32px 20px;
+}
+
+/* ================= INPUTS ================= */
 input {
-    border-radius: 10px;
-    background-color: rgb(255, 255, 246);
-    font-size: 1.2rem;
+    width: 100%;
+    border-radius: var(--radius-md);
+    background-color: #ffffff;
+    font-size: 1rem;
     padding: 12px 16px;
-    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.15));
-    border: none;
+    border: 1px solid #e2e2e2;
+    transition: border .2s ease, box-shadow .2s ease;
 }
 
+input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(109, 93, 252, .15);
+}
+
+/* ================= BUTTON ================= */
 .filled-button {
     border: none;
-    background-color: rgb(146, 69, 255);
-    font-size: 1.4rem;
-    padding: 10px 24px;
-    border-radius: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    font-size: 1rem;
+    padding: 12px 28px;
+    border-radius: var(--radius-md);
     color: white;
     cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease;
 }
 
+.filled-button:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
 
+/* ================= FLASH MESSAGES ================= */
 .flash-container {
-    position: absolute;
-    top: 100px;
+    position: fixed;
+    top: 88px;
     left: 0;
     right: 0;
-
-    z-index: 10;
     display: flex;
-    /* align-items: center; */
     justify-content: center;
+    pointer-events: none;
+    z-index: 100;
 }
 
 .flash-message {
-    background-color: rgb(255, 255, 255);
-    filter: drop-shadow(0px 0px 12px rgba(0, 0, 0, 0.15));
-    border-radius: 12px;
-    font-size: 1.6rem;
-    padding: 12px 20px;
-}
-
-.invalid-input-field {
-    outline: 2px solid red;
-}
-
-.invalid-input-field+label {
-    color: red;
-    font-weight: bold;
-    padding-left: 8px;
-}
-
-
-.flash-message {
-    color: #00000080;
     padding: 16px 24px;
-    border-radius: 8px;
-    position: absolute;
-    top: 100px;
-    margin: 0px 16px;
-    max-width: 432px;
-    z-index: 2;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: white;
+    box-shadow: var(--shadow-md);
+    max-width: 420px;
+    margin: 0 16px;
 }
 
+.success-flash { background-color: var(--success); }
+.error-flash   { background-color: var(--error); }
+.info-flash    { background-color: var(--info); }
 
-.error-flash {
-    background-color: rgb(242, 105, 105);
+/* ================= INVALID INPUT ================= */
+.invalid-input-field {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(232, 106, 106, .2);
 }
 
-.info-flash {
-    background-color: rgb(141, 141, 254);
+.invalid-input-field + label {
+    color: var(--error);
+    font-weight: 600;
+    padding-left: 6px;
 }
 
-.success-flash {
-    background-color: #5ada8e;
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    nav {
+        justify-content: space-between;
+        flex-wrap: wrap;
+        height: auto;
+        padding: 12px 16px;
+    }
+
+    nav > a,
+    nav > form > button {
+        font-size: .95rem;
+        padding: 6px 10px;
+    }
+
+    main {
+        padding: 24px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        gap: 6px;
+    }
+
+    nav > a,
+    nav > form > button {
+        font-size: .9rem;
+    }
 }
