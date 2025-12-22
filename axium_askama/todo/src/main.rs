@@ -18,7 +18,7 @@ async fn main() {
 
 async fn home() -> impl IntoResponse {
     let html = HomeTemplate {
-        title: "Todo App | Home",
+        title: "Home",
         }
         .render()
         .unwrap();
@@ -28,7 +28,7 @@ async fn home() -> impl IntoResponse {
 
 async fn create_todo() -> impl IntoResponse {
     let html = CreateTemplate  {
-        title: "Todo App | Create",
+        title: "Create",
         }
         .render()
         .unwrap();
@@ -38,7 +38,7 @@ async fn create_todo() -> impl IntoResponse {
 
 async fn todos() -> impl IntoResponse {
     let html = TodosTemplate {
-        title: "Todo App | List",
+        title: "List",
     }
         .render()
         .unwrap();
@@ -48,17 +48,17 @@ async fn todos() -> impl IntoResponse {
 
 async fn login_handler() -> impl IntoResponse {
     let html = LoginTemplate {
-        title: "Todo App | Log in",
+        title: "Log in",
     }
         .render()
         .unwrap();
-    
+
     Html(html)
 }
 
 async fn signup_handler() -> impl IntoResponse {
     let html = SignupTemplate {
-        title: "Todo App | Sign up",
+        title: "Sign up",
     }
         .render()
         .unwrap();
