@@ -9,13 +9,14 @@ async fn main() {
     let app = Router::new()
         .route("/", get(home))
         .route("/create", get(create_todo))
-        .route("/todos", get(todos));
+        .route("/todos", get(todos))
+        .route("/login", get(login_handler));
 
     axum::serve(listener, app).await.unwrap();
 }
 
 async fn home() -> impl IntoResponse {
-    let html = HomeTemplate{
+    let html = HomeTemplate {
         title: "Todo App | Home",
         }
         .render()
@@ -25,7 +26,7 @@ async fn home() -> impl IntoResponse {
 }
 
 async fn create_todo() -> impl IntoResponse {
-    let html = CreateTemplate{
+    let html = CreateTemplate  {
         title: "Todo App | Create",
         }
         .render()
@@ -35,12 +36,22 @@ async fn create_todo() -> impl IntoResponse {
 }
 
 async fn todos() -> impl IntoResponse {
-    let html = TodosTemplate{
+    let html = TodosTemplate {
         title: "Todo App | List",
     }
         .render()
         .unwrap();
 
+    Html(html)
+}
+
+async fn login_handler() -> impl IntoResponse {
+    let html = LoginTemplate {
+        title: "Todo App | Login",
+    }
+        .render()
+        .unwrap();
+    
     Html(html)
 }
 
@@ -61,3 +72,10 @@ struct TodosTemplate {
 struct CreateTemplate {
     title: &'static str,
 }
+
+#[derive(Template)]
+#[template(path = "pages/log-in.html")]
+struct LoginTemplate {
+    title: &'static str,
+}
+
