@@ -1,4 +1,5 @@
-use axum::response::IntoResponse;
+use askama::Template;
+use axum::response::{Html, IntoResponse};
 use axum::Router;
 use axum::routing::get;
 
@@ -11,5 +12,12 @@ async fn main() {
 }
 
 async fn home() -> impl IntoResponse {
-    "Axum server"
+    let html_string = HomeTemplate{}.render().unwrap();
+    Html(html_string)
+}
+
+#[derive(Template)]
+#[template(path = "index.html")]
+struct HomeTemplate {
+    
 }
