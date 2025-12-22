@@ -10,7 +10,8 @@ async fn main() {
         .route("/", get(home))
         .route("/create", get(create_todo))
         .route("/todos", get(todos))
-        .route("/login", get(login_handler));
+        .route("/login", get(login_handler))
+        .route("/signup", get(signup_handler));
 
     axum::serve(listener, app).await.unwrap();
 }
@@ -47,11 +48,21 @@ async fn todos() -> impl IntoResponse {
 
 async fn login_handler() -> impl IntoResponse {
     let html = LoginTemplate {
-        title: "Todo App | Login",
+        title: "Todo App | Log in",
     }
         .render()
         .unwrap();
     
+    Html(html)
+}
+
+async fn signup_handler() -> impl IntoResponse {
+    let html = SignupTemplate {
+        title: "Todo App | Sign up",
+    }
+        .render()
+        .unwrap();
+
     Html(html)
 }
 
@@ -76,6 +87,12 @@ struct CreateTemplate {
 #[derive(Template)]
 #[template(path = "pages/log-in.html")]
 struct LoginTemplate {
+    title: &'static str,
+}
+
+#[derive(Template)]
+#[template(path = "pages/sign-up.html")]
+struct SignupTemplate {
     title: &'static str,
 }
 
