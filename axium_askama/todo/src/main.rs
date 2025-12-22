@@ -17,7 +17,7 @@ async fn home() -> impl IntoResponse {
 }
 
 #[derive(Template)]
-#[template(path = "index.html")]
+#[template(path = "pages/home.html")]
 struct HomeTemplate {
-    
+
 }

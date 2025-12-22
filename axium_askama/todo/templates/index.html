@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Todo App</title>
+    <title>{% block title %}
+        {% endblock %}</title>
 </head>
 <body>
     <main>
-        <h1>
-            Hello, from axum!
-        </h1>
+        {% block main %}
+        {% endblock %}
     </main>
 </body>
 </html>
