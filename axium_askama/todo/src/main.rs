@@ -12,12 +12,17 @@ async fn main() {
 }
 
 async fn home() -> impl IntoResponse {
-    let html_string = HomeTemplate{}.render().unwrap();
-    Html(html_string)
+    let html = HomeTemplate{
+        title: "Todo App | Home",
+        }
+        .render()
+        .unwrap();
+
+    Html(html)
 }
 
 #[derive(Template)]
 #[template(path = "pages/home.html")]
 struct HomeTemplate {
-
+    title: &'static str,
 }
