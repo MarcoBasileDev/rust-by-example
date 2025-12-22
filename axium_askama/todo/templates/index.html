@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Todo App | {{ title }}</title>
-
+    <link rel="stylesheet" href="/static/css/global.css" />
 </head>
 <body>
-    <nav>
-        <a href="/">Home</a>
-        <a href="/create">Create</a>
-        <a href="/todos">Todos</a>
-        <a href="/signup">Sign up</a>
-        <a href="/login">Log in</a>
-    </nav>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/create">Create</a>
+            <a href="/todos">Todos</a>
+            <a href="/signup">Sign up</a>
+            <a href="/login">Log in</a>
+        </nav>
+    </header>
+
     <main>
         {% block main %}
         {% endblock %}
