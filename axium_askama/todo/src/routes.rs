@@ -1,9 +1,9 @@
+use crate::handlers::auth::{login_handler, signup_handler};
+use crate::handlers::public::home;
+use crate::handlers::todos::{create_todo, todos};
 use axum::Router;
 use axum::routing::get;
 use tower_http::services::ServeDir;
-use crate::handlers::{public::home};
-use crate::handlers::auth::{login_handler, signup_handler};
-use crate::handlers::todos::{create_todo, todos};
 
 pub fn routes() -> Router {
     let server_dir = ServeDir::new("static");
