@@ -32,3 +32,9 @@ struct HomeTemplate {
 struct TodosTemplate {
     title: &'static str,
 }
+
+#[derive(Template)]
+#[template(path = "pages/create.html")]
+struct CreateTemplate {
+    title: &'static str,
+}
