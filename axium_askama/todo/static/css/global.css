@@ -12,7 +12,9 @@
 /* ================= THEME ================= */
 :root {
     --bg-main: #faf7f2;
-    --bg-header: #ffffffcc;
+    --bg-header: rgba(245, 241, 235, 0.92);
+    --nav-hover-bg: rgba(109, 93, 252, 0.12);
+    --nav-active-bg: rgba(109, 93, 252, 0.18);
     --accent: #6d5dfc;
     --accent-hover: #5a4ae3;
     --text-main: #2d2d2d;
@@ -98,7 +100,21 @@ nav > form > button:hover::after {
 
 nav > a:hover,
 nav > form > button:hover {
-    color: var(--accent);
+    color: var(--accent-hover);
+    background-color: var(--nav-hover-bg);
+}
+
+nav > a.nav-active,
+nav > form > button.nav-active {
+    font-weight: 700;
+    color: var(--accent-hover);
+    background-color: var(--nav-active-bg);
+}
+
+nav > a.nav-active::after,
+nav > form > button.nav-active::after {
+    width: 70%;
+    height: 3px;
 }
 
 /* button reset */
