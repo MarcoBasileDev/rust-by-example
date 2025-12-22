@@ -26,3 +26,9 @@ async fn home() -> impl IntoResponse {
 struct HomeTemplate {
     title: &'static str,
 }
+
+#[derive(Template)]
+#[template(path = "pages/todos.html")]
+struct TodosTemplate {
+    title: &'static str,
+}
