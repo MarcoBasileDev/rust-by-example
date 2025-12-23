@@ -1,4 +1,4 @@
-use crate::handlers::auth::{login_handler, signup_handler};
+use crate::handlers::auth::{login_handler, post_signup_handler, signup_handler};
 use crate::handlers::public::home;
 use crate::handlers::todos::{create_todo, todos};
 use axum::Router;
@@ -20,7 +20,7 @@ pub fn routes() -> Router {
         .route("/create", get(create_todo))
         .route("/todos", get(todos))
         .route("/login", get(login_handler))
-        .route("/signup", get(signup_handler))
+        .route("/signup", get(signup_handler).post(post_signup_handler))
         .nest_service("/static", server_dir)
         .layer(
             TraceLayer::new_for_http()

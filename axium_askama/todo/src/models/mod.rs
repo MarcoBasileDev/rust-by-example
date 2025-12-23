@@ -1,2 +1,2 @@
 pub mod templates;
-mod user_form_model;
+pub mod user_form_model;
