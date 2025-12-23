@@ -1,6 +1,6 @@
 use crate::models::templates::{CreateTemplate, NavItem, TodosTemplate};
 use askama::Template;
-use axum::response::{Html, IntoResponse, Response};
+use axum::response::{Html, IntoResponse};
 
 pub async fn create_todo() -> impl IntoResponse {
     let html = CreateTemplate {

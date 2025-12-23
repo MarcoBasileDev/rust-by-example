@@ -1,6 +1,6 @@
 use crate::models::templates::{LoginTemplate, NavItem, SignupTemplate};
 use askama::Template;
-use axum::response::{Html, IntoResponse, Response};
+use axum::response::{Html, IntoResponse};
 pub async fn login_handler() -> impl IntoResponse {
     let html = LoginTemplate {
         title: "Log in",
