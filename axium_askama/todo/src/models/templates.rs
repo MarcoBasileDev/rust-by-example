@@ -42,4 +42,7 @@ pub struct LoginTemplate<'a> {
 pub struct SignupTemplate<'a> {
     pub title: &'a str,
     pub current_page: NavItem,
+    pub email: &'a str,
+    pub email_error: &'a str,
+    pub password_error: &'a str,
 }
