@@ -1,7 +1,28 @@
 {% extends "index.html" %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/auth.css" />
+{% endblock %}
+
 {% block main %}
-<h1>
-  This is the sign-up page
-</h1>
+<div class="auth-container">
+
+  <h1 class="auth-heading">Create Account</h1>
+  <form method="POST" action="/signup">
+
+    <label>
+      <input type="text" placeholder="Enter your email" name="email">
+    </label>
+
+    <label>
+      <input type="text" placeholder="Enter your password" name="password">
+    </label>
+
+    <button class="filled-button" type="submit">Submit</button>
+  </form>
+  <form method="GET" action="/login">
+    <button>Already have account? Log In</button>
+  </form>
+
+</div>
 {% endblock %}
