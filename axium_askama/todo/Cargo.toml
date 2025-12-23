@@ -6,7 +6,9 @@ edition = "2024"
 [dependencies]
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 axum = "0.8.7"
-askama = "0.14.0"
+askama = "0.15.0"
 tower-http = { version = "0.6.8", features = ["fs", "trace"]}
 tracing = "0.1.44"
 tracing-subscriber = { version = "0.3.22", features = ["env-filter"]}
+serde = {version = "1.0.228", features = ["derive"]}
+validator = { version = "0.20.0", features = ["derive"]}
