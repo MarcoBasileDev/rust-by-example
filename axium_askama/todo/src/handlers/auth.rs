@@ -27,15 +27,12 @@ pub async fn signup_handler() -> impl IntoResponse {
 
 pub async fn post_signup_handler(Form(user_form): Form<AuthFormModel>) -> impl IntoResponse {
     match user_form.validate() {
-        Ok(_) => {
-            Redirect::to("/").into_response()
-        },
+        Ok(_) => Redirect::to("/").into_response(),
         Err(errs) => {
-            
             let errs = errs.to_string();
             tracing::error!("{}", errs);
 
             Redirect::to("/").into_response()
-        },
+        }
     }
 }

@@ -15,7 +15,7 @@ use tracing::Span;
 pub fn routes() -> Router {
     let server_dir = ServeDir::new("static");
 
-    let app = Router::new()
+    Router::new()
         .route("/", get(home))
         .route("/create", get(create_todo))
         .route("/todos", get(todos))
@@ -28,9 +28,7 @@ pub fn routes() -> Router {
                 .on_request(on_request)
                 .on_response(on_response)
                 .on_failure(on_failure),
-        );
-
-    app
+        )
 }
 
 fn on_request(request: &Request<Body>, _: &Span) {
