@@ -1,5 +1,5 @@
 use crate::models::templates::{LoginTemplate, NavItem, SignupTemplate};
-use crate::models::user_form_model::UserFormModel;
+use crate::models::user_form_model::AuthFormModel;
 use askama::Template;
 use axum::Form;
 use axum::response::{Html, IntoResponse, Redirect};
@@ -24,7 +24,7 @@ pub async fn signup_handler() -> impl IntoResponse {
     Html(html)
 }
 
-pub async fn post_signup_handler(Form(user_form): Form<UserFormModel>) -> impl IntoResponse {
+pub async fn post_signup_handler(Form(user_form): Form<AuthFormModel>) -> impl IntoResponse {
     tracing::info!(
         "Email is {} and the password is {}",
         user_form.email,
