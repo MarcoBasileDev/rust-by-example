@@ -1,0 +1,26 @@
+use axum::extract::Request;
+use axum::middleware::Next;
+use axum::response::Response;
+use tower_sessions::Session;
+use crate::handlers::errors::AppError;
+use crate::models::app::CurrentUser;
+
+pub async fn authenticate(session: Session, mut req: Request, next: Next) -> Result<Response, AppError>{
+    let user_id = session.get::<i32>("authenticated_user_id").await?;
+
+    let mut current_user = CurrentUser {
+        is_authenticated: false,
+        user_id: None,
+    };
+
+    if let Some(id) = user_id {
+        current_user.is_authenticated = true;
+        current_user.user_id = Some(id);
+
+        req.extensions_mut().insert(current_user);
+        Ok(next.run(req).await)
+    } else {
+        req.extensions_mut().insert(current_user);
+        Ok(next.run(req).await)
+    }
+}
