@@ -1,3 +1,4 @@
+use crate::handlers::helpers;
 use crate::models::templates::{LoginTemplate, NavItem, SignupTemplate};
 use crate::models::user_form_model::AuthFormModel;
 use askama::Template;
@@ -5,7 +6,6 @@ use axum::Form;
 use axum::http::StatusCode;
 use axum::response::{Html, IntoResponse, Redirect};
 use validator::Validate;
-use crate::handlers::helpers;
 
 pub async fn login_handler() -> impl IntoResponse {
     let html = LoginTemplate {
@@ -54,8 +54,8 @@ pub async fn post_signup_handler(Form(user_form): Form<AuthFormModel>) -> impl I
                 email_error: &email_error,
                 password_error: &password_error,
             }
-                .render()
-                .unwrap();
+            .render()
+            .unwrap();
 
             let response = Html(html_string).into_response();
 
@@ -63,4 +63,3 @@ pub async fn post_signup_handler(Form(user_form): Form<AuthFormModel>) -> impl I
         }
     }
 }
-
