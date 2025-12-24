@@ -7,20 +7,21 @@ use askama::Template;
 use axum::Form;
 use axum::extract::State;
 use axum::http::StatusCode;
-use axum::response::{Html, IntoResponse, Redirect};
+use axum::response::{Html, IntoResponse, Redirect, Response};
 use validator::Validate;
+use crate::data::errors::DataError;
+use crate::handlers::errors::AppError;
 
-pub async fn login_handler() -> impl IntoResponse {
+pub async fn login_handler() -> Result<Response, AppError> {
     let html = LoginTemplate {
         title: "Log in",
         current_page: NavItem::Login,
     }
-    .render()
-    .unwrap();
-    Html(html)
+    .render()?;
+    Ok(Html(html).into_response())
 }
 
-pub async fn signup_handler() -> impl IntoResponse {
+pub async fn signup_handler() -> Result<Response, AppError> {
     let html = SignupTemplate {
         title: "Sign up",
         current_page: NavItem::Signup,
@@ -28,25 +29,34 @@ pub async fn signup_handler() -> impl IntoResponse {
         email_error: "",
         password_error: "",
     }
-    .render()
-    .unwrap();
-    Html(html)
+    .render()?;
+    Ok(Html(html).into_response())
 }
 
 pub async fn post_signup_handler(
     State(app_state): State<AppState>,
     Form(user_form): Form<AuthFormModel>,
-) -> impl IntoResponse {
+) -> Result<Response, AppError> {
     match user_form.validate() {
         Ok(_) => {
-            user::create_user(
+            let result = user::create_user(
                 &app_state.connection_pool,
                 &user_form.email,
                 &user_form.password,
             )
-            .await
-            .unwrap();
-            Redirect::to("/login").into_response()
+            .await;
+
+            if let Err(e) = result {
+                if let DataError::FailedQuery(msg) = e {
+                    tracing::error!("Failed to sign up: {}", msg);
+
+                    return Ok(Redirect::to("/signup").into_response());
+                } else {
+                    Err(e)?
+                }
+            }
+
+            Ok(Redirect::to("/login").into_response())
         }
         Err(errs) => {
             let errs = errs.to_string();
@@ -69,12 +79,11 @@ pub async fn post_signup_handler(
                 email_error: &email_error,
                 password_error: &password_error,
             }
-            .render()
-            .unwrap();
+            .render()?;
 
             let response = Html(html_string).into_response();
 
-            (StatusCode::BAD_REQUEST, response).into_response()
+            Ok((StatusCode::BAD_REQUEST, response).into_response())
         }
     }
 }
