@@ -10,6 +10,9 @@ async fn main() {
     init::logging();
 
     let pg_pool = init::database_connection().await;
+
+    let session_layer = init::session(pg_pool.clone()).await;
+
     let app_state = AppState {
         connection_pool: pg_pool,
     };
@@ -17,7 +20,7 @@ async fn main() {
     tracing::info!("Server is starting...");
     tracing::info!("Listening on: {}", listener.local_addr().unwrap());
 
-    let app = routes::routes(app_state);
+    let app = routes::routes(app_state).layer(session_layer);
     axum::serve(listener, app)
         .await
         .expect("Failed to run server");

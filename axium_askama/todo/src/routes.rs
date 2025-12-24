@@ -1,4 +1,4 @@
-use crate::handlers::auth::{login_handler, post_signup_handler, signup_handler};
+use crate::handlers::auth::{login_handler, post_login_handler, post_signup_handler, signup_handler};
 use crate::handlers::public::home;
 use crate::handlers::todos::{create_todo, todos};
 use crate::models::app::AppState;
@@ -20,7 +20,7 @@ pub fn routes(app_state: AppState) -> Router {
         .route("/", get(home))
         .route("/create", get(create_todo))
         .route("/todos", get(todos))
-        .route("/login", get(login_handler))
+        .route("/login", get(login_handler).post(post_login_handler))
         .route("/signup", get(signup_handler).post(post_signup_handler))
         .nest_service("/static", server_dir)
         .with_state(app_state)
