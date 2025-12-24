@@ -3,7 +3,7 @@ use crate::handlers::auth::{
 };
 use crate::handlers::public::home;
 use crate::handlers::todos::{create_todo, todos};
-use crate::middlewares::authenticate;
+use crate::middlewares::{auth_required, authenticate};
 use crate::models::app::AppState;
 use axum::body::Body;
 use axum::http::Request;
@@ -35,6 +35,13 @@ pub fn routes(app_state: AppState) -> Router {
                 .on_response(on_response)
                 .on_failure(on_failure),
         )
+}
+
+fn protected_routes() -> Router<AppState> {
+    Router::new()
+        .route("/create", get(create_todo))
+        .route("/todos", get(todos))
+        .route_layer(middleware::from_fn(auth_required))
 }
 
 fn on_request(request: &Request<Body>, _: &Span) {
