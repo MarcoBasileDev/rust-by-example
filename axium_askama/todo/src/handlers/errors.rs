@@ -13,6 +13,9 @@ pub enum AppError {
 
     #[error("Template error")]
     Template(#[from] askama::Error),
+
+    #[error("Failer loading session")]
+    Session(#[from] tower_sessions::session::Error),
 }
 
 impl IntoResponse for AppError {
@@ -20,6 +23,7 @@ impl IntoResponse for AppError {
         let (status, response) = match self {
             AppError::Database(e) => server_error(e.to_string()),
             AppError::Template(e) => server_error(e.to_string()),
+            AppError::Session(e) => server_error(e.to_string()),
         };
 
         (status, response).into_response()

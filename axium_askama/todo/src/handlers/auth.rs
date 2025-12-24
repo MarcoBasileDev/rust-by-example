@@ -10,6 +10,7 @@ use axum::Form;
 use axum::extract::State;
 use axum::http::StatusCode;
 use axum::response::{Html, IntoResponse, Redirect, Response};
+use tower_sessions::Session;
 use validator::Validate;
 
 pub async fn login_handler() -> Result<Response, AppError> {
@@ -82,6 +83,7 @@ pub async fn post_signup_handler(
 
 pub async fn post_login_handler(
     State(app_state): State<AppState>,
+    session: Session,
     Form(user_form): Form<AuthFormModel>,
 ) -> Result<Response, AppError> {
     match user_form.validate() {
@@ -93,7 +95,10 @@ pub async fn post_login_handler(
             )
             .await;
             match user_id {
-                Ok(_) => todo!(),
+                Ok(user_id) => {
+                    session.insert("authenticated_user_id", user_id).await?;
+                    Ok(Redirect::to("/todos").into_response())
+                },
                 Err(_) => todo!(),
             }
         }
