@@ -53,6 +53,7 @@ pub struct SignupTemplate<'a> {
     pub email_error: &'a str,
     pub password_error: &'a str,
     pub is_authenticated: bool,
+    pub flash: String,
 }
 
 #[derive(Template)]
