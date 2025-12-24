@@ -43,6 +43,7 @@ pub struct LoginTemplate<'a> {
     pub email_error: &'a str,
     pub password_error: &'a str,
     pub is_authenticated: bool,
+    pub flash_data: FlashData,
 }
 
 #[derive(Template)]

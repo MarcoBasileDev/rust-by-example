@@ -2,7 +2,7 @@ use crate::data::errors::DataError;
 use crate::data::user;
 use crate::handlers::errors::AppError;
 use crate::handlers::helpers;
-use crate::models::app::{AppState, CurrentUser};
+use crate::models::app::{AppState, CurrentUser, FlashStatus};
 use crate::models::templates::{LoginTemplate, NavItem, SignupTemplate};
 use crate::models::user_form_model::AuthFormModel;
 use askama::Template;
@@ -14,8 +14,11 @@ use tower_sessions::Session;
 use validator::Validate;
 
 pub async fn login_handler(
+    session: Session,
     Extension(current_user): Extension<CurrentUser>,
 ) -> Result<Response, AppError> {
+    let flash_data = helpers::get_flash(&session).await?;
+
     let html = LoginTemplate {
         title: "Log in",
         current_page: NavItem::Login,
@@ -23,6 +26,7 @@ pub async fn login_handler(
         email_error: "",
         password_error: "",
         is_authenticated: current_user.is_authenticated,
+        flash_data,
     }
     .render()?;
     Ok(Html(html).into_response())
@@ -32,7 +36,7 @@ pub async fn signup_handler(
     session: Session,
     Extension(current_user): Extension<CurrentUser>,
 ) -> Result<Response, AppError> {
-    let flash_data = helpers::template_flash(&session).await?;
+    let flash_data = helpers::get_flash(&session).await?;
 
     let html = SignupTemplate {
         title: "Sign up",
@@ -64,19 +68,19 @@ pub async fn post_signup_handler(
 
             if let Err(e) = result {
                 if let DataError::FailedQuery(msg) = e {
-                    session.insert("flash", msg).await?;
-
+                    helpers::set_flash(&session, msg, FlashStatus::Error.to_string()).await?;
                     return Ok(Redirect::to("/signup").into_response());
                 } else {
                     Err(e)?
                 }
             }
 
+            helpers::set_flash(&session, "Account created successfully!".to_string(), FlashStatus::Success.to_string()).await?;
             Ok(Redirect::to("/login").into_response())
         }
         Err(errs) => {
             let (email_error, password_error) = auth_validation_errors(errs);
-            let flash_data = helpers::template_flash(&session).await?;
+            let flash_data = helpers::get_flash(&session).await?;
 
             let html_string = SignupTemplate {
                 title: "Sign up",
@@ -115,11 +119,20 @@ pub async fn post_login_handler(
                     session.insert("authenticated_user_id", user_id).await?;
                     Ok(Redirect::to("/todos").into_response())
                 }
-                Err(_) => todo!(),
+                Err(err) => {
+                    if let DataError::FailedQuery(e) = err {
+                        helpers::set_flash(&session, e, FlashStatus::Error.to_string()).await?;
+
+                        Ok(Redirect::to("/login").into_response())
+                    } else {
+                        Err(err)?
+                    }
+                },
             }
         }
         Err(errs) => {
             let (email_error, password_error) = auth_validation_errors(errs);
+            let flash_data = helpers::get_flash(&session).await?;
 
             let html_string = LoginTemplate {
                 title: "Log in",
@@ -128,6 +141,7 @@ pub async fn post_login_handler(
                 email_error: &email_error,
                 password_error: &password_error,
                 is_authenticated: current_user.is_authenticated,
+                flash_data,
             }
             .render()?;
 
