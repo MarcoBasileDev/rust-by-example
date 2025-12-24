@@ -3,12 +3,13 @@ use crate::handlers::auth::{
 };
 use crate::handlers::public::home;
 use crate::handlers::todos::{create_todo, todos};
+use crate::middlewares::authenticate;
 use crate::models::app::AppState;
-use axum::Router;
 use axum::body::Body;
 use axum::http::Request;
 use axum::response::Response;
 use axum::routing::get;
+use axum::{Router, middleware};
 use std::time::Duration;
 use tower_http::classify::ServerErrorsFailureClass;
 use tower_http::services::ServeDir;
@@ -25,6 +26,7 @@ pub fn routes(app_state: AppState) -> Router {
         .route("/login", get(login_handler).post(post_login_handler))
         .route("/signup", get(signup_handler).post(post_signup_handler))
         .nest_service("/static", server_dir)
+        .layer(middleware::from_fn(authenticate))
         .with_state(app_state)
         .layer(
             TraceLayer::new_for_http()
