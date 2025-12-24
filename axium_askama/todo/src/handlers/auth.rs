@@ -98,7 +98,7 @@ pub async fn post_login_handler(
                 Ok(user_id) => {
                     session.insert("authenticated_user_id", user_id).await?;
                     Ok(Redirect::to("/todos").into_response())
-                },
+                }
                 Err(_) => todo!(),
             }
         }
