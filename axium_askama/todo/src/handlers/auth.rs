@@ -1,8 +1,11 @@
+use crate::data::user;
 use crate::handlers::helpers;
+use crate::models::app::AppState;
 use crate::models::templates::{LoginTemplate, NavItem, SignupTemplate};
 use crate::models::user_form_model::AuthFormModel;
 use askama::Template;
 use axum::Form;
+use axum::extract::State;
 use axum::http::StatusCode;
 use axum::response::{Html, IntoResponse, Redirect};
 use validator::Validate;
@@ -30,9 +33,21 @@ pub async fn signup_handler() -> impl IntoResponse {
     Html(html)
 }
 
-pub async fn post_signup_handler(Form(user_form): Form<AuthFormModel>) -> impl IntoResponse {
+pub async fn post_signup_handler(
+    State(app_state): State<AppState>,
+    Form(user_form): Form<AuthFormModel>,
+) -> impl IntoResponse {
     match user_form.validate() {
-        Ok(_) => Redirect::to("/").into_response(),
+        Ok(_) => {
+            user::create_user(
+                &app_state.connection_pool,
+                &user_form.email,
+                &user_form.password,
+            )
+            .await
+            .unwrap();
+            Redirect::to("/login").into_response()
+        }
         Err(errs) => {
             let errs = errs.to_string();
 
