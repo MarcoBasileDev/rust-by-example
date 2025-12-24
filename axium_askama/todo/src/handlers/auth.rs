@@ -2,42 +2,49 @@ use crate::data::errors::DataError;
 use crate::data::user;
 use crate::handlers::errors::AppError;
 use crate::handlers::helpers;
-use crate::models::app::AppState;
+use crate::models::app::{AppState, CurrentUser};
 use crate::models::templates::{LoginTemplate, NavItem, SignupTemplate};
 use crate::models::user_form_model::AuthFormModel;
 use askama::Template;
-use axum::Form;
 use axum::extract::State;
 use axum::http::StatusCode;
 use axum::response::{Html, IntoResponse, Redirect, Response};
+use axum::{Extension, Form};
 use tower_sessions::Session;
 use validator::Validate;
 
-pub async fn login_handler() -> Result<Response, AppError> {
+pub async fn login_handler(
+    Extension(current_user): Extension<CurrentUser>,
+) -> Result<Response, AppError> {
     let html = LoginTemplate {
         title: "Log in",
         current_page: NavItem::Login,
         email: "",
         email_error: "",
         password_error: "",
+        is_authenticated: current_user.is_authenticated,
     }
     .render()?;
     Ok(Html(html).into_response())
 }
 
-pub async fn signup_handler() -> Result<Response, AppError> {
+pub async fn signup_handler(
+    Extension(current_user): Extension<CurrentUser>,
+) -> Result<Response, AppError> {
     let html = SignupTemplate {
         title: "Sign up",
         current_page: NavItem::Signup,
         email: "",
         email_error: "",
         password_error: "",
+        is_authenticated: current_user.is_authenticated,
     }
     .render()?;
     Ok(Html(html).into_response())
 }
 
 pub async fn post_signup_handler(
+    Extension(current_user): Extension<CurrentUser>,
     State(app_state): State<AppState>,
     Form(user_form): Form<AuthFormModel>,
 ) -> Result<Response, AppError> {
@@ -71,6 +78,7 @@ pub async fn post_signup_handler(
                 email: &user_form.email,
                 email_error: &email_error,
                 password_error: &password_error,
+                is_authenticated: current_user.is_authenticated,
             }
             .render()?;
 
@@ -82,6 +90,7 @@ pub async fn post_signup_handler(
 }
 
 pub async fn post_login_handler(
+    Extension(current_user): Extension<CurrentUser>,
     State(app_state): State<AppState>,
     session: Session,
     Form(user_form): Form<AuthFormModel>,
@@ -111,6 +120,7 @@ pub async fn post_login_handler(
                 email: &user_form.email,
                 email_error: &email_error,
                 password_error: &password_error,
+                is_authenticated: current_user.is_authenticated,
             }
             .render()?;
 

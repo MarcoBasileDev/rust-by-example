@@ -14,6 +14,7 @@ pub enum NavItem {
 pub struct HomeTemplate<'a> {
     pub title: &'a str,
     pub current_page: NavItem,
+    pub is_authenticated: bool,
 }
 
 #[derive(Template)]
@@ -21,6 +22,7 @@ pub struct HomeTemplate<'a> {
 pub struct TodosTemplate<'a> {
     pub title: &'a str,
     pub current_page: NavItem,
+    pub is_authenticated: bool,
 }
 
 #[derive(Template)]
@@ -28,6 +30,7 @@ pub struct TodosTemplate<'a> {
 pub struct CreateTemplate<'a> {
     pub title: &'a str,
     pub current_page: NavItem,
+    pub is_authenticated: bool,
 }
 
 #[derive(Template)]
@@ -38,6 +41,7 @@ pub struct LoginTemplate<'a> {
     pub email: &'a str,
     pub email_error: &'a str,
     pub password_error: &'a str,
+    pub is_authenticated: bool,
 }
 
 #[derive(Template)]
@@ -48,6 +52,7 @@ pub struct SignupTemplate<'a> {
     pub email: &'a str,
     pub email_error: &'a str,
     pub password_error: &'a str,
+    pub is_authenticated: bool,
 }
 
 #[derive(Template)]
