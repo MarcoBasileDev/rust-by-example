@@ -131,6 +131,12 @@ pub async fn post_login_handler(
     }
 }
 
+pub async fn logout_handler(session: Session) -> Result<Response, AppError> {
+    session.remove::<i32>("authenticated_user_id").await?;
+
+    Ok(Redirect::to("/").into_response())
+}
+
 fn auth_validation_errors(errs: validator::ValidationErrors) -> (String, String) {
     let errs = errs.to_string();
 
