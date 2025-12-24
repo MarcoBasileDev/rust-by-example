@@ -1,5 +1,7 @@
-use crate::handlers::auth::{login_handler, logout_handler, post_login_handler, post_signup_handler, signup_handler};
-use crate::handlers::public::home;
+use crate::handlers::auth::{
+    login_handler, logout_handler, post_login_handler, post_signup_handler, signup_handler,
+};
+use crate::handlers::public::{home, page_not_found_handler};
 use crate::handlers::todos::{create_todo, todos};
 use crate::middlewares::{auth_required, authenticate};
 use crate::models::app::AppState;
@@ -23,6 +25,7 @@ pub fn routes(app_state: AppState) -> Router {
         .route("/signup", get(signup_handler).post(post_signup_handler))
         .nest_service("/static", server_dir)
         .merge(protected_routes())
+        .fallback(page_not_found_handler)
         .layer(middleware::from_fn(authenticate))
         .with_state(app_state)
         .layer(
