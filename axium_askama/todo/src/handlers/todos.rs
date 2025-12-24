@@ -1,7 +1,7 @@
+use crate::handlers::errors::AppError;
 use crate::models::templates::{CreateTemplate, NavItem, TodosTemplate};
 use askama::Template;
 use axum::response::{Html, IntoResponse, Response};
-use crate::handlers::errors::AppError;
 
 pub async fn create_todo() -> Result<Response, AppError> {
     let html = CreateTemplate {

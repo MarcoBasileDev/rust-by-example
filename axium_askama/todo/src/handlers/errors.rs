@@ -1,10 +1,10 @@
+use crate::data::errors::DataError;
+use crate::models::templates;
 use askama::Template;
 use axum::body::Body;
 use axum::http::StatusCode;
 use axum::response::{Html, IntoResponse, Response};
-use crate::data::errors::DataError;
 use thiserror::Error;
-use crate::models::templates;
 
 #[derive(Error, Debug)]
 pub enum AppError {
@@ -29,6 +29,13 @@ impl IntoResponse for AppError {
 fn server_error(e: String) -> (StatusCode, Response<Body>) {
     tracing::error!("Server error: {}", e);
 
-    let html = templates::ServerErrorTemplate { title: "Server Error" }.render().unwrap();
-    (StatusCode::INTERNAL_SERVER_ERROR, Html(html).into_response())
+    let html = templates::ServerErrorTemplate {
+        title: "Server Error",
+    }
+    .render()
+    .unwrap();
+    (
+        StatusCode::INTERNAL_SERVER_ERROR,
+        Html(html).into_response(),
+    )
 }
