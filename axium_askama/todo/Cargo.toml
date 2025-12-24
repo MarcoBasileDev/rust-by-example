@@ -15,3 +15,4 @@ validator = { version = "0.20.0", features = ["derive"]}
 regex = "1.12.2"
 dotenvy = "0.15.7"
 sqlx = { version = "0.8.6", features = ["runtime-tokio", "tls-rustls", "postgres", "macros"]}
+bcrypt = "0.17.1"
