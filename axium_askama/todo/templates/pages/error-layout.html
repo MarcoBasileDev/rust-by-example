@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/css/global.css" />
+    <link rel="shortcut icon" href="/static/img/favicon.png" type="image/png" />
+    <title>Todo App | {{ title }}</title>
 </head>
 <body>
 {% block main %}{% endblock %}
+
+<a href="/" class="back-home">
+    Back to Home
+</a>
 </body>
 </html>

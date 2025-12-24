@@ -233,3 +233,23 @@ input:focus {
         font-size: .9rem;
     }
 }
+/* ================= BACK TO HOME BUTTON ================= */
+.back-home {
+    display: inline-block;
+    margin-top: 24px;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.back-home:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: linear-gradient(135deg, var(--accent-hover), var(--accent));
+}
