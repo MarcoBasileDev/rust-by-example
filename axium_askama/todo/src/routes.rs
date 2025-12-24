@@ -21,11 +21,10 @@ pub fn routes(app_state: AppState) -> Router {
 
     Router::new()
         .route("/", get(home))
-        .route("/create", get(create_todo))
-        .route("/todos", get(todos))
         .route("/login", get(login_handler).post(post_login_handler))
         .route("/signup", get(signup_handler).post(post_signup_handler))
         .nest_service("/static", server_dir)
+        .merge(protected_routes())
         .layer(middleware::from_fn(authenticate))
         .with_state(app_state)
         .layer(
