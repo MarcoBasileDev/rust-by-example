@@ -46,3 +46,9 @@ pub struct SignupTemplate<'a> {
     pub email_error: &'a str,
     pub password_error: &'a str,
 }
+
+#[derive(Template)]
+#[template(path = "pages/server-error.html")]
+pub struct ServerErrorTemplate<'a> {
+    pub title: &'a str,
+}
