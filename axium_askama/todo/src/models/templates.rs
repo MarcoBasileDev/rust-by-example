@@ -1,4 +1,5 @@
 use askama::Template;
+use crate::models::app::FlashData;
 
 #[derive(PartialEq)]
 pub enum NavItem {
@@ -53,7 +54,7 @@ pub struct SignupTemplate<'a> {
     pub email_error: &'a str,
     pub password_error: &'a str,
     pub is_authenticated: bool,
-    pub flash: String,
+    pub flash_data: FlashData,
 }
 
 #[derive(Template)]
