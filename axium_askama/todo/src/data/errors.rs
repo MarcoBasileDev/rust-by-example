@@ -12,5 +12,5 @@ pub enum DataError {
     Internal(String),
 
     #[error("Failed to hash: {0}")]
-    Bcrypt(#[from] bcrypt::BcryptError)
+    Bcrypt(#[from] bcrypt::BcryptError),
 }

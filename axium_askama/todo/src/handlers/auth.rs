@@ -1,4 +1,6 @@
+use crate::data::errors::DataError;
 use crate::data::user;
+use crate::handlers::errors::AppError;
 use crate::handlers::helpers;
 use crate::models::app::AppState;
 use crate::models::templates::{LoginTemplate, NavItem, SignupTemplate};
@@ -9,8 +11,6 @@ use axum::extract::State;
 use axum::http::StatusCode;
 use axum::response::{Html, IntoResponse, Redirect, Response};
 use validator::Validate;
-use crate::data::errors::DataError;
-use crate::handlers::errors::AppError;
 
 pub async fn login_handler() -> Result<Response, AppError> {
     let html = LoginTemplate {

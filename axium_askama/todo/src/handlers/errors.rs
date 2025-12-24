@@ -1,5 +1,5 @@
-use thiserror::Error;
 use crate::data::errors::DataError;
+use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum AppError {
@@ -7,5 +7,5 @@ pub enum AppError {
     Database(#[from] DataError),
 
     #[error("Template error")]
-    Template(#[from] askama::Error)
+    Template(#[from] askama::Error),
 }
