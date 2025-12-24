@@ -16,6 +16,9 @@ pub async fn login_handler() -> Result<Response, AppError> {
     let html = LoginTemplate {
         title: "Log in",
         current_page: NavItem::Login,
+        email: "",
+        email_error: "",
+        password_error: "",
     }
     .render()?;
     Ok(Html(html).into_response())
@@ -80,6 +83,48 @@ pub async fn post_signup_handler(
                 password_error: &password_error,
             }
             .render()?;
+
+            let response = Html(html_string).into_response();
+
+            Ok((StatusCode::BAD_REQUEST, response).into_response())
+        }
+    }
+}
+
+pub async fn post_login_handler(
+    State(app_state): State<AppState>,
+    Form(user_form): Form<AuthFormModel>,
+) -> Result<Response, AppError> {
+    match user_form.validate() {
+        Ok(_) => {
+            let user_id = user::authenticate_user(&app_state.connection_pool, &user_form.email, &user_form.password).await;
+            match user_id {
+                Ok(_) => todo!(),
+                Err(_) => todo!(),
+            }
+        },
+        Err(errs) => {
+            let errs = errs.to_string();
+
+            let mut email_error = String::new();
+            let mut password_error = String::new();
+
+            helpers::extract_error(&errs, |field, message| {
+                if field == "email" {
+                    email_error = message;
+                } else if field == "password" {
+                    password_error = message
+                }
+            });
+
+            let html_string = LoginTemplate {
+                title: "Log in",
+                current_page: NavItem::Signup,
+                email: &user_form.email,
+                email_error: &email_error,
+                password_error: &password_error,
+            }
+                .render()?;
 
             let response = Html(html_string).into_response();
 
