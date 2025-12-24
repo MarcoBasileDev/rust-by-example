@@ -1,3 +1,4 @@
+use todo::models::app::AppState;
 use todo::{init, routes};
 
 #[tokio::main]
@@ -8,11 +9,15 @@ async fn main() {
 
     init::logging();
 
-    init::database_connection().await;
+    let pg_pool = init::database_connection().await;
+    let app_state = AppState {
+        connection_pool: pg_pool,
+    };
 
+    tracing::info!("Server is starting...");
     tracing::info!("Listening on: {}", listener.local_addr().unwrap());
 
-    let app = routes::routes();
+    let app = routes::routes(app_state);
     axum::serve(listener, app)
         .await
         .expect("Failed to run server");

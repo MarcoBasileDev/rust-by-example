@@ -1,6 +1,7 @@
 use crate::handlers::auth::{login_handler, post_signup_handler, signup_handler};
 use crate::handlers::public::home;
 use crate::handlers::todos::{create_todo, todos};
+use crate::models::app::AppState;
 use axum::Router;
 use axum::body::Body;
 use axum::http::Request;
@@ -12,7 +13,7 @@ use tower_http::services::ServeDir;
 use tower_http::trace::TraceLayer;
 use tracing::Span;
 
-pub fn routes() -> Router {
+pub fn routes(app_state: AppState) -> Router {
     let server_dir = ServeDir::new("static");
 
     Router::new()
@@ -22,6 +23,7 @@ pub fn routes() -> Router {
         .route("/login", get(login_handler))
         .route("/signup", get(signup_handler).post(post_signup_handler))
         .nest_service("/static", server_dir)
+        .with_state(app_state)
         .layer(
             TraceLayer::new_for_http()
                 .make_span_with(|_: &Request<Body>| tracing::info_span!("http-request"))
