@@ -7,7 +7,7 @@
 {% block main %}
 <div class="auth-container">
   <h1 class="auth-heading">Welcome, Log In</h1>
-  <form method="POST" action="/log-in">
+  <form method="POST" action="/login">
 
     {% if email_error.is_empty() %}
     <input type="text" placeholder="Enter your email" name="email" value="{{email}}">
