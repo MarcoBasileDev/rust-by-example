@@ -54,8 +54,8 @@ pub async fn session(pool: PgPool) -> SessionManagerLayer<PostgresStore> {
         .await
         .expect("Failed to run session migration");
 
-    let session_layer = SessionManagerLayer::new(session_store)
-        .with_expiry(Expiry::OnInactivity(time::Duration::days(1)));
+    
 
-    session_layer
+    SessionManagerLayer::new(session_store)
+        .with_expiry(Expiry::OnInactivity(time::Duration::days(1)))
 }
