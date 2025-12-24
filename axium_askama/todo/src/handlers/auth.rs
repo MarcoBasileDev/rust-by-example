@@ -32,8 +32,10 @@ pub async fn signup_handler(
     session: Session,
     Extension(current_user): Extension<CurrentUser>,
 ) -> Result<Response, AppError> {
-
-    let flash = session.remove::<String>("flash").await?.unwrap_or("".to_string());
+    let flash = session
+        .remove::<String>("flash")
+        .await?
+        .unwrap_or("".to_string());
 
     let html = SignupTemplate {
         title: "Sign up",
@@ -42,7 +44,7 @@ pub async fn signup_handler(
         email_error: "",
         password_error: "",
         is_authenticated: current_user.is_authenticated,
-        flash
+        flash,
     }
     .render()?;
     Ok(Html(html).into_response())
@@ -54,8 +56,10 @@ pub async fn post_signup_handler(
     State(app_state): State<AppState>,
     Form(user_form): Form<AuthFormModel>,
 ) -> Result<Response, AppError> {
-
-    let flash = session.remove::<String>("flash").await?.unwrap_or("".to_string());
+    let flash = session
+        .remove::<String>("flash")
+        .await?
+        .unwrap_or("".to_string());
 
     match user_form.validate() {
         Ok(_) => {
