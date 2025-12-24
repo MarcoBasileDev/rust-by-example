@@ -1,4 +1,6 @@
-use crate::handlers::auth::{login_handler, post_login_handler, post_signup_handler, signup_handler};
+use crate::handlers::auth::{
+    login_handler, post_login_handler, post_signup_handler, signup_handler,
+};
 use crate::handlers::public::home;
 use crate::handlers::todos::{create_todo, todos};
 use crate::models::app::AppState;
