@@ -8,6 +8,8 @@ async fn main() {
 
     init::logging();
 
+    init::database_connection().await;
+
     tracing::info!("Listening on: {}", listener.local_addr().unwrap());
 
     let app = routes::routes();
