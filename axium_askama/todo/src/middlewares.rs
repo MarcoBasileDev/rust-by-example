@@ -47,3 +47,15 @@ pub async fn auth_required(
 
     res
 }
+
+pub async fn redirect_auth_user(
+    Extension(current_user): Extension<CurrentUser>,
+    req: Request,
+    next: Next,
+) -> Response {
+    if current_user.is_authenticated {
+        let _ = Redirect::to("/todos").into_response();
+    }
+
+    next.run(req).await
+}

@@ -3,7 +3,7 @@ use crate::handlers::auth::{
 };
 use crate::handlers::public::{home, page_not_found_handler};
 use crate::handlers::todos::{create_todo, todos};
-use crate::middlewares::{auth_required, authenticate};
+use crate::middlewares::{auth_required, authenticate, redirect_auth_user};
 use crate::models::app::AppState;
 use axum::body::Body;
 use axum::http::Request;
@@ -21,8 +21,7 @@ pub fn routes(app_state: AppState) -> Router {
 
     Router::new()
         .route("/", get(home))
-        .route("/login", get(login_handler).post(post_login_handler))
-        .route("/signup", get(signup_handler).post(post_signup_handler))
+        .merge(auth_routes())
         .nest_service("/static", server_dir)
         .merge(protected_routes())
         .fallback(page_not_found_handler)
@@ -35,6 +34,13 @@ pub fn routes(app_state: AppState) -> Router {
                 .on_response(on_response)
                 .on_failure(on_failure),
         )
+}
+
+fn auth_routes() -> Router<AppState> {
+    Router::new()
+        .route("/login", get(login_handler).post(post_login_handler))
+        .route("/signup", get(signup_handler).post(post_signup_handler))
+        .layer(middleware::from_fn(redirect_auth_user))
 }
 
 fn protected_routes() -> Router<AppState> {

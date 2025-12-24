@@ -75,7 +75,12 @@ pub async fn post_signup_handler(
                 }
             }
 
-            helpers::set_flash(&session, "Account created successfully!".to_string(), FlashStatus::Success.to_string()).await?;
+            helpers::set_flash(
+                &session,
+                "Account created successfully!".to_string(),
+                FlashStatus::Success.to_string(),
+            )
+            .await?;
             Ok(Redirect::to("/login").into_response())
         }
         Err(errs) => {
@@ -127,7 +132,7 @@ pub async fn post_login_handler(
                     } else {
                         Err(err)?
                     }
-                },
+                }
             }
         }
         Err(errs) => {

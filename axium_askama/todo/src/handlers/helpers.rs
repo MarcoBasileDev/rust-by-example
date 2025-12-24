@@ -1,6 +1,6 @@
-use tower_sessions::Session;
 use crate::handlers::errors::AppError;
 use crate::models::app::FlashData;
+use tower_sessions::Session;
 
 pub fn extract_error<F>(input: &str, mut f: F)
 where
@@ -27,7 +27,10 @@ pub async fn get_flash(session: &Session) -> Result<FlashData, AppError> {
         .await?
         .unwrap_or("".to_string());
 
-    Ok(FlashData { flash, flash_status })
+    Ok(FlashData {
+        flash,
+        flash_status,
+    })
 }
 
 pub async fn set_flash(session: &Session, message: String, status: String) -> Result<(), AppError> {

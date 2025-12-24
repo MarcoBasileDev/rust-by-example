@@ -1,5 +1,5 @@
-use std::fmt::Display;
 use sqlx::PgPool;
+use std::fmt::Display;
 
 #[derive(Clone)]
 pub struct AppState {
