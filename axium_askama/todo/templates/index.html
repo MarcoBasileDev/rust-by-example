@@ -17,21 +17,31 @@
                 Home
             </a>
 
-            <a href="/create" class="{% if current_page == NavItem::Create %}nav-active{% endif %}">
-                Create
-            </a>
 
-            <a href="/todos" class="{% if current_page == NavItem::Todos %}nav-active{% endif %}">
-                Todos
-            </a>
 
-            <a href="/signup" class="{% if current_page == NavItem::Signup %}nav-active{% endif %}">
-                Sign up
-            </a>
+            {% if is_authenticated %}
+                <a href="/create" class="{% if current_page == NavItem::Create %}nav-active{% endif %}">
+                    Create
+                </a>
 
-            <a href="/login" class="{% if current_page == NavItem::Login %}nav-active{% endif %}">
-                Log in
-            </a>
+                <a href="/todos" class="{% if current_page == NavItem::Todos %}nav-active{% endif %}">
+                    Todos
+                </a>
+
+                <form action="/logout" method="POST">
+                    <button type="submit">Log out</button>
+                </form>
+
+            {% else %}
+                <a href="/signup" class="{% if current_page == NavItem::Signup %}nav-active{% endif %}">
+                    Sign up
+                </a>
+
+                <a href="/login" class="{% if current_page == NavItem::Login %}nav-active{% endif %}">
+                    Log in
+                </a>
+            {% endif %}
+
         </nav>
     </header>
 
