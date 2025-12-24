@@ -62,18 +62,7 @@ pub async fn post_signup_handler(
             Ok(Redirect::to("/login").into_response())
         }
         Err(errs) => {
-            let errs = errs.to_string();
-
-            let mut email_error = String::new();
-            let mut password_error = String::new();
-
-            helpers::extract_error(&errs, |field, message| {
-                if field == "email" {
-                    email_error = message;
-                } else if field == "password" {
-                    password_error = message
-                }
-            });
+            let (email_error, password_error) = auth_validation_errors(errs);
 
             let html_string = SignupTemplate {
                 title: "Sign up",
@@ -97,25 +86,19 @@ pub async fn post_login_handler(
 ) -> Result<Response, AppError> {
     match user_form.validate() {
         Ok(_) => {
-            let user_id = user::authenticate_user(&app_state.connection_pool, &user_form.email, &user_form.password).await;
+            let user_id = user::authenticate_user(
+                &app_state.connection_pool,
+                &user_form.email,
+                &user_form.password,
+            )
+            .await;
             match user_id {
                 Ok(_) => todo!(),
                 Err(_) => todo!(),
             }
-        },
+        }
         Err(errs) => {
-            let errs = errs.to_string();
-
-            let mut email_error = String::new();
-            let mut password_error = String::new();
-
-            helpers::extract_error(&errs, |field, message| {
-                if field == "email" {
-                    email_error = message;
-                } else if field == "password" {
-                    password_error = message
-                }
-            });
+            let (email_error, password_error) = auth_validation_errors(errs);
 
             let html_string = LoginTemplate {
                 title: "Log in",
@@ -124,11 +107,28 @@ pub async fn post_login_handler(
                 email_error: &email_error,
                 password_error: &password_error,
             }
-                .render()?;
+            .render()?;
 
             let response = Html(html_string).into_response();
 
             Ok((StatusCode::BAD_REQUEST, response).into_response())
         }
     }
+}
+
+fn auth_validation_errors(errs: validator::ValidationErrors) -> (String, String) {
+    let errs = errs.to_string();
+
+    let mut email_error = String::new();
+    let mut password_error = String::new();
+
+    helpers::extract_error(&errs, |field, message| {
+        if field == "email" {
+            email_error = message;
+        } else if field == "password" {
+            password_error = message;
+        }
+    });
+
+    (email_error, password_error)
 }
