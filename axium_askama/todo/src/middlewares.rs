@@ -1,8 +1,10 @@
 use crate::handlers::errors::AppError;
 use crate::models::app::CurrentUser;
+use axum::Extension;
 use axum::extract::Request;
+use axum::http::header::CACHE_CONTROL;
 use axum::middleware::Next;
-use axum::response::Response;
+use axum::response::{IntoResponse, Redirect, Response};
 use tower_sessions::Session;
 
 pub async fn authenticate(
@@ -27,4 +29,21 @@ pub async fn authenticate(
         req.extensions_mut().insert(current_user);
         Ok(next.run(req).await)
     }
+}
+
+pub async fn auth_required(
+    Extension(current_user): Extension<CurrentUser>,
+    req: Request,
+    next: Next,
+) -> Response {
+    if !current_user.is_authenticated {
+        return Redirect::to("/login").into_response();
+    }
+
+    let mut res = next.run(req).await;
+
+    res.headers_mut()
+        .insert(CACHE_CONTROL, "no-store".parse().unwrap());
+
+    res
 }
