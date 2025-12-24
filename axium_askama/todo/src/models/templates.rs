@@ -60,3 +60,9 @@ pub struct SignupTemplate<'a> {
 pub struct ServerErrorTemplate<'a> {
     pub title: &'a str,
 }
+
+#[derive(Template)]
+#[template(path = "pages/not-found.html")]
+pub struct PageNotFoundTemplate<'a> {
+    pub title: &'a str,
+}
