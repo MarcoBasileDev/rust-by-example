@@ -1,6 +1,4 @@
-use crate::handlers::auth::{
-    login_handler, post_login_handler, post_signup_handler, signup_handler,
-};
+use crate::handlers::auth::{login_handler, logout_handler, post_login_handler, post_signup_handler, signup_handler};
 use crate::handlers::public::home;
 use crate::handlers::todos::{create_todo, todos};
 use crate::middlewares::{auth_required, authenticate};
@@ -8,7 +6,7 @@ use crate::models::app::AppState;
 use axum::body::Body;
 use axum::http::Request;
 use axum::response::Response;
-use axum::routing::get;
+use axum::routing::{get, post};
 use axum::{Router, middleware};
 use std::time::Duration;
 use tower_http::classify::ServerErrorsFailureClass;
@@ -40,6 +38,7 @@ fn protected_routes() -> Router<AppState> {
     Router::new()
         .route("/create", get(create_todo))
         .route("/todos", get(todos))
+        .route("/logout", post(logout_handler))
         .route_layer(middleware::from_fn(auth_required))
 }
 
