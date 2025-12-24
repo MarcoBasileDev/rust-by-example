@@ -1,23 +1,24 @@
 use crate::models::templates::{CreateTemplate, NavItem, TodosTemplate};
 use askama::Template;
-use axum::response::{Html, IntoResponse};
+use axum::response::{Html, IntoResponse, Response};
+use crate::handlers::errors::AppError;
 
-pub async fn create_todo() -> impl IntoResponse {
+pub async fn create_todo() -> Result<Response, AppError> {
     let html = CreateTemplate {
         title: "Create",
         current_page: NavItem::Create,
     }
-    .render()
-    .unwrap();
-    Html(html)
+    .render()?;
+
+    Ok(Html(html).into_response())
 }
 
-pub async fn todos() -> impl IntoResponse {
+pub async fn todos() -> Result<Response, AppError> {
     let html = TodosTemplate {
         title: "List",
         current_page: NavItem::Todos,
     }
-    .render()
-    .unwrap();
-    Html(html)
+    .render()?;
+
+    Ok(Html(html).into_response())
 }
