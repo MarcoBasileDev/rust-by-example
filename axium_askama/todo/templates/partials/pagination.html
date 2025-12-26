@@ -1,0 +1,19 @@
+<div>
+    <span>
+        Page {{ current_page_number }} of {{ total_pages }}
+    </span>
+
+    <span class="pagination-btns">
+        {% if let Some(p) = previous_page() %}
+            <a class="pagination-btn" href="/todos/{{ p }}">
+                <p>Previous</p>
+            </a>
+        {% endif %}
+
+        {% if let Some(p) = next_page() %}
+            <a class="pagination-btn" href="/todos/{{ p }}">
+                <p>Next</p>
+            </a>
+        {% endif %}
+    </span>
+</div>

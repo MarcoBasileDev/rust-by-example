@@ -47,6 +47,24 @@ pub struct TodosTemplate<'a> {
     pub previous_page: fn(i32) -> i32,
 }
 
+impl<'a> TodosTemplate<'a> {
+    pub fn previous_page(&self) -> Option<i32> {
+        if self.current_page_number > 1 {
+            Some(self.current_page_number - 1)
+        } else {
+            None
+        }
+    }
+
+    pub fn next_page(&self) -> Option<i32> {
+        if self.current_page_number < self.total_pages {
+            Some(self.current_page_number + 1)
+        } else {
+            None
+        }
+    }
+}
+
 #[derive(Template)]
 #[template(path = "pages/create.html")]
 pub struct CreateTemplate<'a> {

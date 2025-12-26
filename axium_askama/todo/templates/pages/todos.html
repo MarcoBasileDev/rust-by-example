@@ -29,12 +29,14 @@
                         <p class="todo-task">{{todo.task}}</p>
                     </div>
 
-                    <form method="POST" , action="/todos/delete/{{todo.id}}?page={{current_page}}">
+                    <form method="POST" , action="/todos/delete/{{todo.id}}?page={{current_page_number}}">
                         <button class="delete-button" type="submit">DELETE</button>
                     </form>
                 </div>
             </div>
         {% endfor %}
+
+        {% include "partials/pagination.html" %}
 
     {% endif %}
 
