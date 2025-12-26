@@ -8,7 +8,17 @@ pub async fn create(pool: &PgPool, task: &str, author_id: &i32) -> Result<(), Da
         author_id
     )
     .execute(pool)
-    .await?;
+    .await
+        .map_err(|err| match err {
+            sqlx::Error::Database(e) => {
+                if e.constraint() == Some("todo_task_key") {
+                    DataError::FailedQuery("This task already exists.".to_string())
+                } else {
+                    DataError::Internal(e.to_string())
+                }
+            }
+            e => DataError::Query(e)
+        })?;
 
     Ok(())
 }
