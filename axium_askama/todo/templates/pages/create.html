@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 
 {% block main %}
-<form method="POST" action="/todos/create">
+<form method="POST" action="/todos/create" style="display: flex; gap: 10px;">
   <input type="text" placeholder="Add your todo" name="task" />
   <button class="filled-button" type="submit">Add</button>
 </form>
