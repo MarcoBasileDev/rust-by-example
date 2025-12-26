@@ -117,7 +117,7 @@ pub async fn post_login_handler(
                 handle_client_error!(user_id, &session, Redirect::to("/login").into_response());
 
             session.insert("authenticated_user_id", user_id).await?;
-            Ok(Redirect::to("/todos").into_response())
+            Ok(Redirect::to("/todos/1").into_response())
         }
         Err(errs) => {
             let (email_error, password_error) = auth_validation_errors(errs);

@@ -52,7 +52,7 @@ fn protected_routes() -> Router<AppState> {
 
 fn todo_routes() -> Router<AppState> {
     Router::new()
-        .route("/", get(todos))
+        .route("/{page}", get(todos))
         .route("/create", get(create_todo).post(post_create_todo_handler))
         .route("/set_as_done/{id}", post(set_as_done_todo_handler))
         .route("/delete/{id}", post(delete_todo_handler))
