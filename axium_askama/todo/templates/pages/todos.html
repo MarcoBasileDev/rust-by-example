@@ -16,7 +16,7 @@
             <div class="card">
                 <div>
 
-                    <form method="POST" , action="/todos/set_as_done/{{todo.id}}">
+                    <form method="POST" , action="/todos/set_as_done/{{todo.id}}?page={{current_page_number}}">
                         <input type="hidden" name="is_done" value="{{!todo.is_done}}">
                         {% if todo.is_done %}
                         <button class="undone-button" type="submit">Undone</button>

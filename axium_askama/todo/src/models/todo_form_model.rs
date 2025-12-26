@@ -9,3 +9,9 @@ pub struct CreateTodoFormModel {
 pub struct MarkTodoAsDoneFormModel {
     pub is_done: bool,
 }
+
+#[derive(Deserialize)]
+pub struct TodoPageQuery {
+    pub page: usize,
+}
+
