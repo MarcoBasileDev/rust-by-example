@@ -1,7 +1,7 @@
-use std::fmt;
 use crate::data::todo::Todo;
 use crate::models::app::FlashData;
 use askama::Template;
+use std::fmt;
 
 #[derive(PartialEq, Copy, Clone, Debug)]
 pub enum NavItem {

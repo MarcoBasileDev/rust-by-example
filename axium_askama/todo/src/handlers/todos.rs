@@ -1,6 +1,7 @@
 use crate::data::todo;
 use crate::handle_client_error;
 use crate::handlers::errors::AppError;
+use crate::handlers::functions::{next_page, previous_page};
 use crate::handlers::helpers;
 use crate::models::app::{AppState, CurrentUser, FlashStatus};
 use crate::models::templates::{CreateTemplate, NavItem, TodosTemplate};
@@ -10,7 +11,6 @@ use axum::extract::{Path, State};
 use axum::response::{Html, IntoResponse, Redirect, Response};
 use axum::{Extension, Form};
 use tower_sessions::Session;
-use crate::handlers::functions::{next_page, previous_page};
 
 pub async fn create_todo(
     Extension(current_user): Extension<CurrentUser>,

@@ -2,7 +2,9 @@ use crate::handlers::auth::{
     login_handler, logout_handler, post_login_handler, post_signup_handler, signup_handler,
 };
 use crate::handlers::public::{home, page_not_found_handler};
-use crate::handlers::todos::{create_todo, delete_todo_handler, post_create_todo_handler, set_as_done_todo_handler, todos};
+use crate::handlers::todos::{
+    create_todo, delete_todo_handler, post_create_todo_handler, set_as_done_todo_handler, todos,
+};
 use crate::middlewares::{auth_required, authenticate, redirect_auth_user};
 use crate::models::app::AppState;
 use axum::body::Body;
