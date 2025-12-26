@@ -1,7 +1,27 @@
 {% extends "index.html" %}
 
+{% block css %}
+<link rel="stylesheet" href="/static/css/todo.css" />
+{% endblock %}
+
 {% block main %}
-<h1>
-  This is the todos page.
-</h1>
+
+    {% include "partials/flash.html" %}
+
+    {% if todos.is_empty() %}
+        <h1>Empty Todos</h1>
+    {% else %}
+
+        {% for todo in todos %}
+            <div class="card">
+                <div>
+                    <div>
+                        <p class="todo-task">{{todo.task}}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+    {% endif %}
+
 {% endblock %}
