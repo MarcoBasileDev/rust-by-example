@@ -25,7 +25,7 @@ pub async fn create_todo(
     Ok(Html(html).into_response())
 }
 
-pub async fn todos(Extension(current_user): Extension<CurrentUser>, session: Session, app_state: AppState) -> Result<Response, AppError> {
+pub async fn todos(Extension(current_user): Extension<CurrentUser>, session: Session, State(app_state): State<AppState>,) -> Result<Response, AppError> {
     let flash_data = helpers::get_flash(&session).await?;
     let user_id = current_user.user_id.unwrap();
 
