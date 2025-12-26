@@ -4,9 +4,9 @@ use crate::handlers::errors::AppError;
 use crate::handlers::helpers;
 use crate::models::app::{AppState, CurrentUser, FlashStatus};
 use crate::models::templates::{CreateTemplate, NavItem, TodosTemplate};
-use crate::models::todo_form_model::CreateTodoFormModel;
+use crate::models::todo_form_model::{CreateTodoFormModel, MarkTodoAsDoneFormModel};
 use askama::Template;
-use axum::extract::State;
+use axum::extract::{Path, State};
 use axum::response::{Html, IntoResponse, Redirect, Response};
 use axum::{Extension, Form};
 use tower_sessions::Session;
@@ -62,5 +62,24 @@ pub async fn post_create_todo_handler(
     session
         .insert("flash_status", FlashStatus::Success.to_string())
         .await?;
+    Ok(Redirect::to("/todos").into_response())
+}
+
+pub async fn set_as_done_todo_handler(
+    State(app_state): State<AppState>,
+    Path(id): Path<i32>,
+    Form(todo_form): Form<MarkTodoAsDoneFormModel>,
+) -> Result<Response, AppError> {
+    todo::set_as_done(&app_state.connection_pool, &id, &todo_form.is_done).await?;
+
+    Ok(Redirect::to("/todos").into_response())
+}
+
+pub async fn delete_todo_handler(
+    Path(id): Path<i32>,
+    State(app_state): State<AppState>,
+) -> Result<Response, AppError> {
+    todo::delete(&app_state.connection_pool, &id).await?;
+
     Ok(Redirect::to("/todos").into_response())
 }

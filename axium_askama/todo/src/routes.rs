@@ -2,7 +2,7 @@ use crate::handlers::auth::{
     login_handler, logout_handler, post_login_handler, post_signup_handler, signup_handler,
 };
 use crate::handlers::public::{home, page_not_found_handler};
-use crate::handlers::todos::{create_todo, post_create_todo_handler, todos};
+use crate::handlers::todos::{create_todo, delete_todo_handler, post_create_todo_handler, set_as_done_todo_handler, todos};
 use crate::middlewares::{auth_required, authenticate, redirect_auth_user};
 use crate::models::app::AppState;
 use axum::body::Body;
@@ -54,6 +54,8 @@ fn todo_routes() -> Router<AppState> {
     Router::new()
         .route("/", get(todos))
         .route("/create", get(create_todo).post(post_create_todo_handler))
+        .route("/set_as_done/{id}", post(set_as_done_todo_handler))
+        .route("/delete/{id}", post(delete_todo_handler))
 }
 
 fn on_request(request: &Request<Body>, _: &Span) {

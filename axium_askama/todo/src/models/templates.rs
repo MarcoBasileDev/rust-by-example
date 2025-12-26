@@ -1,14 +1,28 @@
+use std::fmt;
 use crate::data::todo::Todo;
 use crate::models::app::FlashData;
 use askama::Template;
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Copy, Clone, Debug)]
 pub enum NavItem {
     Home,
     Create,
     Todos,
     Login,
     Signup,
+}
+
+impl fmt::Display for NavItem {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        let s = match self {
+            NavItem::Home => "home",
+            NavItem::Create => "create",
+            NavItem::Todos => "todos",
+            NavItem::Login => "login",
+            NavItem::Signup => "signup",
+        };
+        write!(f, "{s}")
+    }
 }
 
 #[derive(Template)]
