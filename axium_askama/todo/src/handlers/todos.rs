@@ -27,12 +27,15 @@ pub async fn create_todo(
 pub async fn todos(
     Extension(current_user): Extension<CurrentUser>,
     session: Session,
+    Path(page): Path<i32>,
     State(app_state): State<AppState>,
 ) -> Result<Response, AppError> {
     let flash_data = helpers::get_flash(&session).await?;
     let user_id = current_user.user_id.unwrap();
 
-    let todos = todo::get_all(&app_state.connection_pool, &user_id).await?;
+    let page_size = 3;
+
+    let todos = todo::get_all(&app_state.connection_pool, &user_id, &page_size, &page).await?;
 
     let html = TodosTemplate {
         title: "List",
@@ -56,13 +59,13 @@ pub async fn post_create_todo_handler(
 
     let result = todo::create(&app_state.connection_pool, &create_todo_form.task, &user_id).await;
 
-    handle_client_error!(result, &session, Redirect::to("/todos").into_response());
+    handle_client_error!(result, &session, Redirect::to("/todos/1").into_response());
 
     session.insert("flash", "Todo created successfully").await?;
     session
         .insert("flash_status", FlashStatus::Success.to_string())
         .await?;
-    Ok(Redirect::to("/todos").into_response())
+    Ok(Redirect::to("/todos/1").into_response())
 }
 
 pub async fn set_as_done_todo_handler(
@@ -72,7 +75,7 @@ pub async fn set_as_done_todo_handler(
 ) -> Result<Response, AppError> {
     todo::set_as_done(&app_state.connection_pool, &id, &todo_form.is_done).await?;
 
-    Ok(Redirect::to("/todos").into_response())
+    Ok(Redirect::to("/todos/1").into_response())
 }
 
 pub async fn delete_todo_handler(
@@ -81,5 +84,5 @@ pub async fn delete_todo_handler(
 ) -> Result<Response, AppError> {
     todo::delete(&app_state.connection_pool, &id).await?;
 
-    Ok(Redirect::to("/todos").into_response())
+    Ok(Redirect::to("/todos/1").into_response())
 }
