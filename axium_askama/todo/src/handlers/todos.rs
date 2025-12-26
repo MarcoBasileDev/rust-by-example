@@ -79,7 +79,7 @@ pub async fn set_as_done_todo_handler(
     State(app_state): State<AppState>,
     Path(id): Path<i32>,
     Query(todo_page_query): Query<TodoPageQuery>,
-    Form(todo_form): Form<MarkTodoAsDoneFormModel>
+    Form(todo_form): Form<MarkTodoAsDoneFormModel>,
 ) -> Result<Response, AppError> {
     todo::set_as_done(&app_state.connection_pool, &id, &todo_form.is_done).await?;
 
@@ -91,7 +91,7 @@ pub async fn set_as_done_todo_handler(
 pub async fn delete_todo_handler(
     Path(id): Path<i32>,
     State(app_state): State<AppState>,
-    Query(todo_page_query): Query<TodoPageQuery>
+    Query(todo_page_query): Query<TodoPageQuery>,
 ) -> Result<Response, AppError> {
     todo::delete(&app_state.connection_pool, &id).await?;
 

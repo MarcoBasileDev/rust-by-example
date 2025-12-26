@@ -14,4 +14,3 @@ pub struct MarkTodoAsDoneFormModel {
 pub struct TodoPageQuery {
     pub page: usize,
 }
-
