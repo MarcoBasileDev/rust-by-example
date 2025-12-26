@@ -1,5 +1,6 @@
 use crate::models::app::FlashData;
 use askama::Template;
+use crate::data::todo::Todo;
 
 #[derive(PartialEq)]
 pub enum NavItem {
@@ -24,6 +25,8 @@ pub struct TodosTemplate<'a> {
     pub title: &'a str,
     pub current_page: NavItem,
     pub is_authenticated: bool,
+    pub flash_data: FlashData,
+    pub todos: Vec<Todo>,
 }
 
 #[derive(Template)]
