@@ -1,5 +1,5 @@
-use crate::data::errors::DataError;
 use crate::data::user;
+use crate::handle_client_error;
 use crate::handlers::errors::AppError;
 use crate::handlers::helpers;
 use crate::models::app::{AppState, CurrentUser, FlashStatus};
@@ -12,7 +12,6 @@ use axum::response::{Html, IntoResponse, Redirect, Response};
 use axum::{Extension, Form};
 use tower_sessions::Session;
 use validator::Validate;
-use crate::handle_client_error;
 
 pub async fn login_handler(
     session: Session,
@@ -114,7 +113,8 @@ pub async fn post_login_handler(
             )
             .await;
 
-            let user_id = handle_client_error!(user_id, &session, Redirect::to("/login").into_response());
+            let user_id =
+                handle_client_error!(user_id, &session, Redirect::to("/login").into_response());
 
             session.insert("authenticated_user_id", user_id).await?;
             Ok(Redirect::to("/todos").into_response())

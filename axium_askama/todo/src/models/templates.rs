@@ -1,6 +1,6 @@
+use crate::data::todo::Todo;
 use crate::models::app::FlashData;
 use askama::Template;
-use crate::data::todo::Todo;
 
 #[derive(PartialEq)]
 pub enum NavItem {

@@ -1,16 +1,15 @@
-use crate::handlers::errors::AppError;
-use crate::models::app::{AppState, CurrentUser, FlashStatus};
-use crate::models::templates::{CreateTemplate, NavItem, TodosTemplate};
-use askama::Template;
-use axum::{Extension, Form};
-use axum::extract::State;
-use axum::response::{Html, IntoResponse, Redirect, Response};
-use tower_sessions::Session;
 use crate::data::todo;
 use crate::handle_client_error;
+use crate::handlers::errors::AppError;
 use crate::handlers::helpers;
-use crate::init::session;
+use crate::models::app::{AppState, CurrentUser, FlashStatus};
+use crate::models::templates::{CreateTemplate, NavItem, TodosTemplate};
 use crate::models::todo_form_model::CreateTodoFormModel;
+use askama::Template;
+use axum::extract::State;
+use axum::response::{Html, IntoResponse, Redirect, Response};
+use axum::{Extension, Form};
+use tower_sessions::Session;
 
 pub async fn create_todo(
     Extension(current_user): Extension<CurrentUser>,
@@ -25,7 +24,11 @@ pub async fn create_todo(
     Ok(Html(html).into_response())
 }
 
-pub async fn todos(Extension(current_user): Extension<CurrentUser>, session: Session, State(app_state): State<AppState>,) -> Result<Response, AppError> {
+pub async fn todos(
+    Extension(current_user): Extension<CurrentUser>,
+    session: Session,
+    State(app_state): State<AppState>,
+) -> Result<Response, AppError> {
     let flash_data = helpers::get_flash(&session).await?;
     let user_id = current_user.user_id.unwrap();
 

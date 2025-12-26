@@ -21,9 +21,9 @@ pub async fn handle_err(
     response: Response,
 ) -> Result<Response, AppError> {
     if let DataError::FailedQuery(e) = err {
-        helpers::set_flash(&session, e, FlashStatus::Error.to_string()).await?;
+        helpers::set_flash(session, e, FlashStatus::Error.to_string()).await?;
 
-        return Ok(response);
+        Ok(response)
     } else {
         Err(err.into())
     }

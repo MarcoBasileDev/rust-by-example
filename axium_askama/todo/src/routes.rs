@@ -51,7 +51,8 @@ fn protected_routes() -> Router<AppState> {
 }
 
 fn todo_routes() -> Router<AppState> {
-    Router::new().route("/", get(todos))
+    Router::new()
+        .route("/", get(todos))
         .route("/create", get(create_todo).post(post_create_todo_handler))
 }
 
