@@ -3,7 +3,7 @@ use sqlx::PgPool;
 
 pub async fn create(pool: &PgPool, task: &str, author_id: &i32) -> Result<(), DataError> {
     sqlx::query!(
-        r#"INSERT INTO todo (task, author_id) VALUES ($1, $2)"#,
+        r#"INSERT INTO todos (task, author_id) VALUES ($1, $2)"#,
         task,
         author_id
     )

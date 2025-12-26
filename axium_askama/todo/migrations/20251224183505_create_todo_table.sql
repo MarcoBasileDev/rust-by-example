@@ -1,5 +1,5 @@
 -- Add migration script here
-CREATE TABLE IF NOT EXISTS todo (
+CREATE TABLE IF NOT EXISTS todos (
     id serial NOT NULL PRIMARY KEY,
     task text NOT NULL UNIQUE,
     is_done BOOLEAN DEFAULT false NOT NULL,
