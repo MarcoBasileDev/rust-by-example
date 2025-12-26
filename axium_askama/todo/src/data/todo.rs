@@ -58,3 +58,12 @@ pub async fn set_as_done(pool: &PgPool, todo_id: &i32, is_done: &bool) -> Result
 
     Ok(())
 }
+
+pub async fn delete(pool: &PgPool, todo_id: &i32) -> Result<(), DataError> {
+    sqlx::query!(
+        r#"DELETE FROM todos WHERE id = $1"#,
+        todo_id
+    ).execute(pool).await?;
+
+    Ok(())
+}
