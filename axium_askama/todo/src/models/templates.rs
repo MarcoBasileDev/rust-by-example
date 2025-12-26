@@ -41,6 +41,10 @@ pub struct TodosTemplate<'a> {
     pub is_authenticated: bool,
     pub flash_data: FlashData,
     pub todos: Vec<Todo>,
+    pub current_page_number: i32,
+    pub total_pages: i32,
+    pub next_page: fn(i32) -> i32,
+    pub previous_page: fn(i32) -> i32,
 }
 
 #[derive(Template)]

@@ -10,6 +10,7 @@ use axum::extract::{Path, State};
 use axum::response::{Html, IntoResponse, Redirect, Response};
 use axum::{Extension, Form};
 use tower_sessions::Session;
+use crate::handlers::functions::{next_page, previous_page};
 
 pub async fn create_todo(
     Extension(current_user): Extension<CurrentUser>,
@@ -34,6 +35,8 @@ pub async fn todos(
     let user_id = current_user.user_id.unwrap();
 
     let page_size = 3;
+    let total_todos = todo::get_total_todos(&app_state.connection_pool).await?;
+    let total_pages = (total_todos + page_size - 1) / page_size;
 
     let todos = todo::get_all(&app_state.connection_pool, &user_id, &page_size, &page).await?;
 
@@ -43,6 +46,10 @@ pub async fn todos(
         is_authenticated: current_user.is_authenticated,
         flash_data,
         todos,
+        current_page_number: page,
+        total_pages,
+        next_page,
+        previous_page,
     }
     .render()?;
 
