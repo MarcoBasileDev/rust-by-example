@@ -12,6 +12,7 @@ use axum::response::{Html, IntoResponse, Redirect, Response};
 use axum::{Extension, Form};
 use tower_sessions::Session;
 use validator::Validate;
+use crate::handle_client_error;
 
 pub async fn login_handler(
     session: Session,
@@ -66,14 +67,7 @@ pub async fn post_signup_handler(
             )
             .await;
 
-            if let Err(e) = result {
-                if let DataError::FailedQuery(msg) = e {
-                    helpers::set_flash(&session, msg, FlashStatus::Error.to_string()).await?;
-                    return Ok(Redirect::to("/signup").into_response());
-                } else {
-                    Err(e)?
-                }
-            }
+            handle_client_error!(result, &session, Redirect::to("/signup").into_response());
 
             helpers::set_flash(
                 &session,
@@ -119,21 +113,11 @@ pub async fn post_login_handler(
                 &user_form.password,
             )
             .await;
-            match user_id {
-                Ok(user_id) => {
-                    session.insert("authenticated_user_id", user_id).await?;
-                    Ok(Redirect::to("/todos").into_response())
-                }
-                Err(err) => {
-                    if let DataError::FailedQuery(e) = err {
-                        helpers::set_flash(&session, e, FlashStatus::Error.to_string()).await?;
 
-                        Ok(Redirect::to("/login").into_response())
-                    } else {
-                        Err(err)?
-                    }
-                }
-            }
+            let user_id = handle_client_error!(user_id, &session, Redirect::to("/login").into_response());
+
+            session.insert("authenticated_user_id", user_id).await?;
+            Ok(Redirect::to("/todos").into_response())
         }
         Err(errs) => {
             let (email_error, password_error) = auth_validation_errors(errs);
