@@ -47,3 +47,14 @@ pub async fn get_all(
 
     Ok(todos)
 }
+
+pub async fn set_as_done(pool: &PgPool, todo_id: &i32, is_done: &bool) -> Result<(), DataError> {
+    sqlx::query!(
+        r#"UPDATE todos SET is_done = $1 WHERE id = $2"#,
+        is_done,
+        todo_id
+    )
+    .execute(pool).await?;
+
+    Ok(())
+}
