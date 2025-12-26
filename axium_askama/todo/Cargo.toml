@@ -19,3 +19,4 @@ bcrypt = "0.17.1"
 thiserror = "2.0.17"
 tower-sessions = "0.14.0"
 tower-sessions-sqlx-store = {version = "0.15.0", features = ["postgres"]}
+chrono = "0.4.42"
