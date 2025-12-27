@@ -27,6 +27,18 @@ struct Rectangle {
     bottom_right: Point,
 }
 
+fn rect_area(rect: &Rectangle) -> f32 {
+    let Rectangle {
+        top_left: Point { x: left, y: top },
+        bottom_right: Point { x: right, y: bottom },
+    } = rect;
+
+    let width = right - left;
+    let height = top - bottom;
+
+    width * height
+}
+
 fn main() {
     // Create struct with field init shorthand
     let name = String::from("Peter");
