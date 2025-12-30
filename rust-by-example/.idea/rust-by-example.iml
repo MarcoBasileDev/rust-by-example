@@ -7,11 +7,13 @@
       <sourceFolder url="file://$MODULE_DIR$/1_HelloWorld/Formatting/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/2_Primitives/Structures/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/2_Primitives/Tuples/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/2_Primitives/enums/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/1_HelloWorld/Display/target" />
       <excludeFolder url="file://$MODULE_DIR$/1_HelloWorld/FormattedPrint/target" />
       <excludeFolder url="file://$MODULE_DIR$/1_HelloWorld/Formatting/target" />
       <excludeFolder url="file://$MODULE_DIR$/2_Primitives/Structures/target" />
       <excludeFolder url="file://$MODULE_DIR$/2_Primitives/Tuples/target" />
+      <excludeFolder url="file://$MODULE_DIR$/2_Primitives/enums/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
